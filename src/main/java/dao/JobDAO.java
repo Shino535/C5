@@ -10,9 +10,7 @@ import bean.JobBean;
 import bean.SearchBean;
 
 public class JobDAO extends DAO {
-	//■searchメソッド
-	//Productテーブル内のレコードを検索するためのメソッド
-	//引数：検索文字列)String)　戻り値：検索結果(List<Product>)
+	//JobListActinのsearchメソッド（会社名の絞り込み時）
 	public List<JobBean> search(String company) throws Exception {
 
 		//検索結果を入れるArrayListを準備
@@ -27,6 +25,44 @@ public class JobDAO extends DAO {
 				PreparedStatement st = con.prepareStatement(sql);) {
 			//プレースホルダーへ値を入れる
 			st.setString(1, "%" + company + "%");
+			//SQLの実行、結果を取得
+			ResultSet rs = st.executeQuery();
+			//結果を1レコードずつBeanへ格納し、ArrayListへ追加
+			while (rs.next()) {
+				JobBean job = new JobBean();
+				job.setCode(rs.getString("code"));
+				job.setCompany(rs.getString("company"));
+				job.setAddress(rs.getString("address"));
+				job.setJob_type(rs.getString("Job_type"));
+				job.setBenefit(rs.getInt("Benefit"));
+				job.setHoliday(rs.getInt("Holiday"));
+				job.setEmployment(rs.getString("Employment"));
+				job.setPdf_path(rs.getString("Pdf_path"));
+
+				list.add(job);
+			}
+			//DBにsearchし、その結果をBeanに格納し返す
+			return list;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	
+	//JobListActinのsearchメソッド（会社名の絞り込み無し）
+	public List<JobBean> search() throws Exception {
+
+		//検索結果を入れるArrayListを準備
+		List<JobBean> list = new ArrayList<>();
+
+		//String companyがnullとnull以外のSQL文をsql変数に代入する
+		String sql = "SELECT * FROM testjob ";
+
+		try ( //データベースへ接続
+				Connection con = getConnection();
+				//SQLの準備
+				PreparedStatement st = con.prepareStatement(sql);) {
+
 			//SQLの実行、結果を取得
 			ResultSet rs = st.executeQuery();
 			//結果を1レコードずつBeanへ格納し、ArrayListへ追加
@@ -82,6 +118,7 @@ public class JobDAO extends DAO {
 		}
 		return result;
 	}
+
 	// 全アクターが使える求人検索用のメソッド
 	public List<JobBean> search(SearchBean searchBean, int page) throws Exception {
 		List<JobBean> jobList = new ArrayList<JobBean>();
@@ -296,6 +333,8 @@ public class JobDAO extends DAO {
 		}
 		return result;
 	}
+
+	
 	//codeをもとに会社名だけ抜き出す
 	public String getName(String code)throws Exception{
 		String name = null;
