@@ -16,37 +16,39 @@
 			<a href="/C5/">C5</a>
 			
 			<!-- roleで分けるヘッダー -->
-			<c:choose>
-				<c:when test="${sessionScope.root.role=='root'}">
-					<a href="/C5/root/Register.action">管理者アカウント登録</a>
-					<a href="/C5/root/ExperienceList.action">就活体験談削除</a>
-					<a href="/C5/root/JobRegister.action">求人情報登録</a>
-					<a href="/C5/root/JobList.action">求人情報管理</a>
-					<a href="/C5/Logout.action">ログアウト</a>
-				</c:when>
-				<c:when test="${sessionScope.user.role=='user'}">
-					<a href="/C5/Logout.action">ログアウト</a>
-				</c:when>
-				<c:otherwise>
-					<!-- <a href="/C5/root/Login.action">管理者ログイン</a> -->
-					<a href="/C5/user/Login.action">利用者ログイン</a>
-					<a href="/C5/user/Register.action">利用者会員登録</a>
-				</c:otherwise>
-			</c:choose>
-			
-			<!-- 名前表示 -->
 			<div>
 				<c:choose>
-					<c:when test="${not empty sessionScope.root.name}">
-						<c:out value="${sessionScope.root.name}"/>
+					<c:when test="${sessionScope.root.role=='root'}">
+						<a href="/C5/root/Register.action">管理者アカウント登録</a>
+						<a href="/C5/root/ExperienceList.action">就活体験談削除</a>
+						<a href="/C5/root/JobRegister.action">求人情報登録</a>
+						<a href="/C5/root/JobList.action">求人情報管理</a>
+						<a href="/C5/Logout.action">ログアウト</a>
 					</c:when>
-					<c:when test="${not empty sessionScope.user.name}">
-						<c:out value="${sessionScope.user.name}"/>
+					<c:when test="${sessionScope.user.role=='user'}">
+						<a href="/C5/Logout.action">ログアウト</a>
 					</c:when>
 					<c:otherwise>
-						<c:out value="ゲスト"/>
+						<!-- <a href="/C5/root/Login.action">管理者ログイン</a> -->
+						<a href="/C5/user/Login.action">利用者ログイン</a>
+						<a href="/C5/user/Register.action">利用者会員登録</a>
 					</c:otherwise>
 				</c:choose>
+				
+				<!-- 名前表示 -->
+				<button>
+					<c:choose>
+						<c:when test="${not empty sessionScope.root.name}">
+							<c:out value="${sessionScope.root.name}"/>
+						</c:when>
+						<c:when test="${not empty sessionScope.user.name}">
+							<c:out value="${sessionScope.user.name}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="ゲストさん"/>
+						</c:otherwise>
+					</c:choose>
+				</button>
 			</div>
 		</header>
 		<main>

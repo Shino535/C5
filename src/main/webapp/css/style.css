@@ -44,10 +44,9 @@ header{
 	background-color: var(--main-black);
 	display: flex;
 	height: 5rem;
-	height: 5rem;
 	box-shadow: var(--material-shadow);
 	align-items: center;
-	
+	justify-content: space-between;
 }
 header>*{
 	color: white;
