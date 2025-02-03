@@ -51,6 +51,20 @@ header{
 header>*{
 	color: white;
 }
+header a{
+	text-decoration: none;
+	color: var(--main-white);
+}
+.title{
+	white-space: nowrap;
+	font-family: "banana-font";
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 15px;
+	margin-bottom: 10px;
+	user-select: none;
+}
 /*===============================ヘッダー===============================*/
 
 /*===============================メインコンテンツ===============================*/

@@ -13,7 +13,12 @@
 	<body>
 		<header>
 			<!-- トップページ -->
-			<a href="/C5/">C5</a>
+			<div class="title-container">
+				<a href="/C5" class="title">
+					<h1>C5</h1>
+					RECRUIT
+				</a>
+			</div>
 			
 			<!-- roleで分けるヘッダー -->
 			<div>
