@@ -28,6 +28,14 @@ body{
 	min-height: 100vh;
 	margin: 0;
 }
+textarea{
+	background-color: var(--main-white);
+	resize: none;
+	border: none;
+	box-shadow: var(--material-shadow);
+	font-size: 16px;
+	outline: none;
+}
 /*====================全部====================*/
 /*===============================共通===============================*/
 
