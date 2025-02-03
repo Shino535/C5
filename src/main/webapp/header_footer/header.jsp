@@ -15,8 +15,7 @@
 			<!-- トップページ -->
 			<div class="title-container">
 				<a href="/C5" class="title">
-					<h1>C5</h1>
-					RECRUIT
+					<h1>C5</h1>RECRUIT
 				</a>
 			</div>
 			
