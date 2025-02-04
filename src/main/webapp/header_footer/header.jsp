@@ -30,12 +30,12 @@
 						<a href="/C5/Logout.action">ログアウト</a>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='user'}">
-						<a href="/C5/Logout.action">ログアウト</a>
+						<a href="/C5/Logout.action" class="nav-icon">ログアウト</a>
 					</c:when>
 					<c:otherwise>
-						<!-- <a href="/C5/root/Login.action">管理者ログイン</a> -->
-						<a href="/C5/user/Login.action">利用者ログイン</a>
-						<a href="/C5/user/Register.action">利用者会員登録</a>
+						<a href="/C5/root/Login.action" class="nav-button">管理者ログイン</a>
+						<a href="/C5/user/Login.action" class="nav-button">利用者ログイン</a>
+						<a href="/C5/user/Register.action" class="nav-button">利用者会員登録</a>
 					</c:otherwise>
 				</c:choose>
 				

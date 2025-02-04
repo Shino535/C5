@@ -4,10 +4,9 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
+import bean.JobBean;
 import dao.JobDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,95 +26,111 @@ public class JobUpdateAction extends Action {
 		String employment = request.getParameter("employment");
 		String pdf = null;
 		String code = request.getParameter("code");
-
-		// エラーメッセージリスト
-		List<String> errorMessages = new ArrayList<>();
+		
+		int benefit;
+		int holiday;
+		
+		// 失敗時にも元の情報をセット
+		JobDAO dao = new JobDAO();
+		JobBean jobBean = dao.getJob(code);
+		request.setAttribute("jobBean", jobBean);
 
 		// 1. 空白チェック
-		checkEmptyFields(new String[] { "会社名", "県", "住所", "職種", "月収", "年間休日", "雇用形態" },
-				new String[] { company, prefecture, address, job_type, s_benefit, s_holiday, employment },
-				errorMessages);
-
-		if (!errorMessages.isEmpty()) {
-			request.setAttribute("errorMessages", errorMessages);
-			return "jobList.jsp"; // 求人情報一覧画面に遷移
+		if (company.isBlank() || prefecture.isBlank() || address.isBlank() || job_type.isBlank() || s_benefit.isBlank()
+				|| s_holiday.isBlank() || employment.isBlank()) {
+			setError(request, "全ての項目を入力してください", company, prefecture, address, job_type, s_benefit, s_holiday,
+					employment);
+			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
 
-		//		// 2. 県と住所合体
-		//		address = (prefecture != null && !prefecture.trim().isEmpty() ? prefecture : "") +
-		//				(address != null && !address.trim().isEmpty() ? address : "");
-
-		// 3. 文字数制限チェック
-		checkFieldLength(new String[] { "会社名", "住所", "職種" }, new String[] { company, address, job_type },
-				errorMessages);
-
-		if (!errorMessages.isEmpty()) {
-			request.setAttribute("errorMessages", errorMessages);
-			return "jobList.jsp"; // 求人情報一覧画面に遷移
+		// 2. 文字数チェック
+		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50) {
+			setError(request, "文字数が多いです", company, prefecture, address, job_type, s_benefit, s_holiday, employment);
+			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
 
-		// 4. 月収（benefit）と年間休日（holiday）の数値チェック
-		validatePositiveIntegers(new String[] { "月収", "年間休日" }, new String[] { s_benefit, s_holiday }, errorMessages);
-
-		if (!errorMessages.isEmpty()) {
-			request.setAttribute("errorMessages", errorMessages);
-			return "jobList.jsp"; // 求人情報一覧画面に遷移
+		// 3. benefitとholidayの数字チェック
+		if (s_benefit.matches("[0-9]+")) {
+			benefit = Integer.parseInt(s_benefit);
+			if (benefit < 1) {
+				setError(request, "月収は1以上の半角数字で入力してください", company, prefecture, address, job_type, s_benefit, s_holiday,
+						employment);
+			}
+		} else {
+			setError(request, "月収は半角数字で入力してください", company, prefecture, address, job_type, s_benefit, s_holiday,
+					employment);
+			return "jobUpdateInput.jsp";
+		}
+		if (s_holiday.matches("[0-9]+")) {
+			holiday = Integer.parseInt(s_holiday);
+			if (holiday > 1) {
+				setError(request, "年間休日は1以上の半角数字で入力してください", company, prefecture, address, job_type, s_benefit,
+						s_holiday, employment);
+			}
+		} else {
+			setError(request, "年間休日は半角数字で入力してください", company, prefecture, address, job_type, s_benefit, s_holiday,
+					employment);
+			return "jobUpdateInput.jsp";
 		}
 
-		// 5. PDFファイルのアップロード処理
+		// 5.PDFファイルのアップロード処理
 		Part part = request.getPart("pdf");
 		String fileName = part.getSubmittedFileName();
 
+		String fullPath = request.getServletContext().getRealPath("/");
+
+		//		System.out.println(fullPath);
+
+		int metaIndex = fullPath.indexOf(".metadata");
+		String uploadPath = fullPath.substring(0, metaIndex) + "C5/src/main/webapp/pdf/";
+		String lastFileName;
+
+		// 6.PDFファイルエラーハンドリング
 		if (fileName != null && !fileName.isBlank()) {
-
-			//アップロードパス処理
-			String uploadPath = request.getServletContext().getRealPath("/");
-			if (uploadPath.indexOf(".metadata") != -1) {
-				String resultPath = uploadPath.substring(0, uploadPath.indexOf(".metadata"))
-						+ "C5/src/main/webapp/pdf/";
-				uploadPath = resultPath.replace("\\", "/");
-			}
-
-			//ファイル名被り対策処理
+			// ファイル名被り対策
 			String uuid = UUID.randomUUID().toString();
 			String extension = fileName.substring(fileName.lastIndexOf("."));
-			String LastFileName = uuid + extension;
-			File file = new File(uploadPath + LastFileName);
+			lastFileName = uuid + extension;
+			File file = new File(uploadPath + lastFileName);
 			while (file.exists()) {
 				uuid = UUID.randomUUID().toString();
-				LastFileName = uuid + extension;
-				file = new File(uploadPath + LastFileName);
+				lastFileName = uuid + extension;
+				file = new File(uploadPath + lastFileName);
 			}
-			part.write(uploadPath + LastFileName);
-			pdf = uploadPath + LastFileName;
+			part.write(uploadPath + lastFileName);
+			pdf = uploadPath + lastFileName;
 
-			//PDFファイルか判別
+			// PDFか判別
 			if (!request.getServletContext().getMimeType(pdf).startsWith("application/pdf")) {
-				File uploadFile = new File(pdf);
-				uploadFile.delete();
-
-				request.setAttribute("error", "PDFのみ選択出来ます");
-				return "jobList.jsp"; // 求人情報一覧画面に遷移
+				File uploaFile = new File(pdf);
+				uploaFile.delete();
+				setError(request, "アップロードできるのはPDFファイルのみです", company, prefecture, address, job_type, s_benefit,
+						s_holiday, employment);
+				return "jobUpdateInput.jsp";
 			}
 
-			//ファイルサイズ判別
-			Path path = Paths.get(pdf);
-			Double d = (double) (Files.size(path) / 1048576);
-			if (d > 10.0) {
-				File uploadFile = new File(pdf);
-				uploadFile.delete();
-
-				request.setAttribute("error", "10MB以下のファイルのみ選択できます");
-				return "jobList.jsp"; // 求人情報一覧画面に遷移
+			// ファイルサイズ判別
+			Path p = Paths.get(pdf);
+			double d = Files.size(p) / 1048576.0;
+			if (d > 10) {
+				File uploFile = new File(pdf);
+				uploFile.delete();
+				setError(request, "PDFのファイルサイズは10MB以下です", company, prefecture, address, job_type, s_benefit, s_holiday,
+						employment);
+				return "jobUpdateInput.jsp";
 			}
+		} else {
+			setError(request, "PDFは必須です", company, prefecture, address, job_type, s_benefit, s_holiday, employment);
+			return "jobUpdateInput.jsp";
 		}
+		pdf = "pdf/" + lastFileName;
 
 		// 更新処理
 		//■DAOのsearchメソッドを呼びだしてBDにアクセスし、searchメソッドの戻り値で検索結果を返す
 		//SELECT文のLIKEなどで複数のレコードを返す場合は、List型で受け取る（searchメソッド内でArrayListに格納し戻り値で返している）
 
-		JobDAO dao = new JobDAO();
-		
+
+
 		boolean result = dao.update(company, prefecture, address, job_type, s_benefit, s_holiday,
 				employment, pdf, code);
 
@@ -127,43 +142,20 @@ public class JobUpdateAction extends Action {
 		}
 	}
 
+	// エラーメッセージ用メソッド
+	private void setError(HttpServletRequest request, String error, String company, String prefecture, String address,
+			String job_type, String benefit, String holiday, String employment) {
+		request.setAttribute("error", error);
+		request.setAttribute("company", company);
+		request.setAttribute("prefecture", prefecture);
+		request.setAttribute("address", address);
+		request.setAttribute("job_type", job_type);
+		request.setAttribute("benefit", benefit);
+		request.setAttribute("holiday", holiday);
+		request.setAttribute("employment", employment);
 
-	// 空白またはnull判定用の共通メソッド
-	private void checkEmptyFields(String[] fieldNames, String[] fieldValues, List<String> errorMessages) {
-		for (int i = 0; i < fieldValues.length; i++) {
-			if (isNullOrEmpty(fieldValues[i])) {
-				errorMessages.add(fieldNames[i] + "は必須項目です。"); // どのフィールドが空白かも指摘
-			}
-		}
-	}
 
-	// 空白またはnull判定用のメソッド
-	private boolean isNullOrEmpty(String str) {
-		return str == null || str.trim().isEmpty();
-	}
 
-	// 文字数制限をチェックするメソッド
-	private void checkFieldLength(String[] fieldNames, String[] fieldValues, List<String> errorMessages) {
-		int[] maxLengths = { 100, 100, 50 }; // 会社名: 100, 住所: 100, 職種: 50
-		for (int i = 0; i < fieldValues.length; i++) {
-			if (fieldValues[i].length() > maxLengths[i]) {
-				errorMessages.add(fieldNames[i] + "は" + maxLengths[i] + "文字以内で入力してください。");
-			}
-		}
-	}
-
-	// 数値として有効かつ1以上の整数を確認するヘルパーメソッド
-	private void validatePositiveIntegers(String[] fieldNames, String[] fieldValues, List<String> errorMessages) {
-		for (int i = 0; i < fieldValues.length; i++) {
-			try {
-				int value = Integer.parseInt(fieldValues[i]);
-				if (value <= 0) {
-					errorMessages.add(fieldNames[i] + "は1以上の数値で入力してください。");
-				}
-			} catch (NumberFormatException e) {
-				errorMessages.add(fieldNames[i] + "は数値で入力してください。");
-			}
-		}
 	}
 
 }

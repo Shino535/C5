@@ -17,7 +17,7 @@ public class JobDAO extends DAO {
 		List<JobBean> list = new ArrayList<>();
 
 		//String companyがnullとnull以外のSQL文をsql変数に代入する
-		String sql = "SELECT * FROM testjob WHERE company LIKE ?";
+		String sql = "SELECT * FROM job WHERE company LIKE ?";
 
 		try ( //データベースへ接続
 				Connection con = getConnection();
@@ -56,7 +56,7 @@ public class JobDAO extends DAO {
 		List<JobBean> list = new ArrayList<>();
 
 		//String companyがnullとnull以外のSQL文をsql変数に代入する
-		String sql = "SELECT * FROM testjob ";
+		String sql = "SELECT * FROM job ";
 
 		try ( //データベースへ接続
 				Connection con = getConnection();
@@ -89,7 +89,7 @@ public class JobDAO extends DAO {
 	// 求人を更新するメソッド
 	public boolean update(String company, String prefecture, String address, String job_type, String s_benefit, String s_holiday, String employment, String pdf, String code) throws Exception {
 		boolean result = false;
-		String sql = "UPDATE testjob SET company=? , prefecture=? ,address=? ,job_type=? ,benefit=? ,holiday=?, employment=?,pdf_path=? WHERE code=?";
+		String sql = "UPDATE job SET company=? , prefecture=? ,address=? ,job_type=? ,benefit=? ,holiday=?, employment=?,pdf_path=? WHERE code=?";
 		try (Connection con = getConnection();
 			PreparedStatement st = con.prepareStatement(sql);) {
 			//データ型の変換
@@ -122,7 +122,7 @@ public class JobDAO extends DAO {
 	// 全アクターが使える求人検索用のメソッド
 	public List<JobBean> search(SearchBean searchBean, int page) throws Exception {
 		List<JobBean> jobList = new ArrayList<JobBean>();
-		String sql = "SELECT * FROM testjob WHERE 1=1 ";
+		String sql = "SELECT * FROM job WHERE 1=1 ";
 		if (searchBean.getCompany() != null && !searchBean.getCompany().isEmpty()) {
 			sql += "AND company LIKE ? ";
 		}
@@ -192,7 +192,7 @@ public class JobDAO extends DAO {
 	// 求人検索のページネーション用
 	public int count(SearchBean searchBean) throws Exception {
 		int count = 0;
-		String sql = "SELECT COUNT(*) FROM testjob WHERE 1=1 ";
+		String sql = "SELECT COUNT(*) FROM job WHERE 1=1 ";
 		if (searchBean.getCompany() != null && !searchBean.getCompany().isEmpty()) {
 			sql += "AND company LIKE ? ";
 		}
@@ -249,7 +249,7 @@ public class JobDAO extends DAO {
 	// Jobの各プロパティを送り登録して、登録できたJobBeanを返す
 	public JobBean add(String company, String prefecture, String address, String job_type, int benefit, int holiday, String employment, String pdf_path)throws Exception{
 		JobBean job = null;
-		String sql = "INSERT INTO testjob(company, prefecture, address, job_type, benefit, holiday, employment, pdf_path) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO job(company, prefecture, address, job_type, benefit, holiday, employment, pdf_path) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			connection.setAutoCommit(false);
@@ -265,19 +265,15 @@ public class JobDAO extends DAO {
 			
 			int rowsAffected = pstmt.executeUpdate();
 			if (rowsAffected == 1) {
-				try(ResultSet rs = pstmt.getGeneratedKeys()){
-					if(rs.next()) {
-						job = new JobBean();
-						job.setCompany(company);
-						job.setPrefecture(prefecture);
-						job.setAddress(address);
-						job.setJob_type(job_type);
-						job.setBenefit(benefit);
-						job.setHoliday(holiday);
-						job.setEmployment(employment);
-						job.setPdf_path(pdf_path);
-					}
-				}
+				job = new JobBean();
+				job.setCompany(company);
+				job.setPrefecture(prefecture);
+				job.setAddress(address);
+				job.setJob_type(job_type);
+				job.setBenefit(benefit);
+				job.setHoliday(holiday);
+				job.setEmployment(employment);
+				job.setPdf_path(pdf_path);
 				connection.commit();
 			} else {
 				connection.rollback();
@@ -289,7 +285,7 @@ public class JobDAO extends DAO {
 	// codeを元に一つのjobのみ返す
 	public JobBean getJob(String code) throws Exception {
 		JobBean job = null;
-		String sql = "SELECT * FROM testjob WHERE code=?";
+		String sql = "SELECT * FROM job WHERE code=?";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			pstmt.setString(1, code);
@@ -313,7 +309,7 @@ public class JobDAO extends DAO {
 	//
 	public boolean delete(String code) throws Exception {
 		boolean result = false;
-		String sql = "DELETE FROM testjob WHERE code=?";
+		String sql = "DELETE FROM job WHERE code=?";
 		try (Connection connection = getConnection();
 				PreparedStatement st = connection.prepareStatement(sql)) {
 
@@ -338,7 +334,7 @@ public class JobDAO extends DAO {
 	//codeをもとに会社名だけ抜き出す
 	public String getName(String code)throws Exception{
 		String name = null;
-		String sql = "SELECT company FROM testjob WHERE code=?";
+		String sql = "SELECT company FROM job WHERE code=?";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)){
 			pstmt.setString(1, code);

@@ -12,7 +12,7 @@ public class JobExperienceDAO extends DAO {
 	
 	// 体験談を追加するメソッド
 	public void add(String comment, String user_code, String job_code, String user_name, String job_name)throws Exception {
-		String sql = "INSERT INTO testjobExperience(comment, user_code, job_code, user_name, job_name) VALUES(?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO jobExperience(comment, user_code, job_code, user_name, job_name) VALUES(?, ?, ?, ?, ?)";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)){
 			connection.setAutoCommit(false);
@@ -36,7 +36,7 @@ public class JobExperienceDAO extends DAO {
 	// 体験談を削除するメソッド
 	public boolean delete(String code)throws Exception{
 		boolean result = false;
-		String sql = "DELETE FROM testjobExperience WHERE code=?";
+		String sql = "DELETE FROM jobExperience WHERE code=?";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			connection.setAutoCommit(false);
@@ -59,12 +59,13 @@ public class JobExperienceDAO extends DAO {
 	public List<JobExperienceBean> getExperience()throws Exception{
 		List<JobExperienceBean> experienceList=new ArrayList<JobExperienceBean>();
 		JobExperienceBean jobExperience=null;
-		String sql="SELECT * FROM testjobexperience";
+		String sql="SELECT * FROM jobexperience";
 		try(Connection connection=getConnection();
 			PreparedStatement pstmt=connection.prepareStatement(sql)){
 			try(ResultSet rs=pstmt.executeQuery()){
 				while(rs.next()) {
 					jobExperience = new JobExperienceBean();
+					jobExperience.setCode(rs.getString("code"));
 					jobExperience.setJob_code(rs.getString("job_code"));
 					jobExperience.setUser_code(rs.getString("user_code"));
 					jobExperience.setJob_name(rs.getString("job_name"));
@@ -82,7 +83,7 @@ public class JobExperienceDAO extends DAO {
 	public List<JobExperienceBean> getExperience(String job_code)throws Exception{
 		List<JobExperienceBean> experienceList=new ArrayList<JobExperienceBean>();
 		JobExperienceBean jobExperience = null;
-		String sql = "SELECT * FROM testjobexperience WHERE job_code = ?";
+		String sql = "SELECT * FROM jobexperience WHERE job_code = ?";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)){
 			pstmt.setString(1, job_code);

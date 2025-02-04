@@ -4,8 +4,10 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.UUID;
 
+import dao.JobDAO;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -36,13 +38,13 @@ public class JobRegisterAction extends Action {
 			setError(request, "全ての項目を入力してください", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
 			return "jobRegister.jsp"; // フォームに戻る
 		}
-
+		
 		// 2. 文字数チェック
 		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50) {
 			setError(request, "文字数が多いです", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
 			return "jobRegister.jsp"; // フォームに戻る
 		}
-
+		
 		// 3. benefitとholidayの数字チェック
 		if(benefitStr.matches("[0-9]+")) {
 			benefit = Integer.parseInt(benefitStr);
@@ -68,16 +70,14 @@ public class JobRegisterAction extends Action {
 		String fileName = part.getSubmittedFileName();
 		
 		String fullPath = request.getServletContext().getRealPath("/");
-		String sqlPath = "C5/src/main/webapp/pdf/";
-		
-		System.out.println(fullPath);
 		
 		int metaIndex = fullPath.indexOf(".metadata");
-		String uploadPath = fullPath.substring(0, metaIndex) + sqlPath;
+		String uploadPath = fullPath.substring(0, metaIndex) + "C5/src/main/webapp/pdf/";
 		String lastFileName;
 		
+		// 6.PDFファイルエラーハンドリング
 		if (fileName != null && !fileName.isBlank()) {
-			// ファイル名被り対策処理
+			// ファイル名被り対策
 			String uuid = UUID.randomUUID().toString();
 			String extension = fileName.substring(fileName.lastIndexOf("."));
 			lastFileName = uuid + extension;
@@ -111,22 +111,22 @@ public class JobRegisterAction extends Action {
 			setError(request, "PDFは必須です", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
 			return "jobRegister.jsp";
 		}
-		pdf = sqlPath + lastFileName;
-		System.out.println(pdf);
-		return null;
-//		// DB登録
-//		try {
-//			
-//			JobDAO jobDAO = new JobDAO();
-//			jobDAO.add(company, prefecture, address, job_type, benefit, holiday, employment, pdf);
-//			return "rootRegistrationSuccess.jsp";
-//		}catch (SQLIntegrityConstraintViolationException e) {
-//			String error = e.getMessage();
-//			if(error.contains("cannot be null")) {
-//				setError(request, "全ての項目を入力してください", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
-//			}
-//			return "jobRegister.jsp";
-//		}
+		pdf = "pdf/" + lastFileName;
+		
+		// DB登録
+		try {
+			JobDAO jobDAO = new JobDAO();
+			jobDAO.add(company, prefecture, address, job_type, benefit, holiday, employment, pdf);
+			request.setAttribute("result", true);
+			setError(request, "登録成功", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
+			return "jobRegister.jsp";
+		}catch (SQLIntegrityConstraintViolationException e) {
+			String error = e.getMessage();
+			if(error.contains("cannot be null")) {
+				setError(request, "全ての項目を入力してください", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
+			}
+			return "jobRegister.jsp";
+		}
 	}
 	
 	// エラーメッセージ用メソッド

@@ -11,7 +11,7 @@ import bean.RootBean;
 public class RootDAO extends DAO {
 	public RootBean login(String id,String pass)throws Exception{
 		RootBean root=null;
-		String sql="SELECT * FROM testroot WHERE BINARY id=? AND BINARY pass=?";
+		String sql="SELECT * FROM root WHERE BINARY id=? AND BINARY pass=?";
 		try(Connection connection=getConnection();
 			PreparedStatement pstmt=connection.prepareStatement(sql);){
 			
@@ -31,7 +31,7 @@ public class RootDAO extends DAO {
 		return root;
 	}
 	public void register(String id,String name,String pass)throws Exception{
-		String sql="INSERT INTO testroot(id,name,pass) VALUE(?,?,?)";
+		String sql="INSERT INTO root(id,name,pass) VALUE(?,?,?)";
 		try(Connection connection=getConnection();
 			PreparedStatement pstmt=connection.prepareStatement(sql);){
 			
@@ -44,7 +44,7 @@ public class RootDAO extends DAO {
 	}
 	public boolean update(String fieldName, String updateField, String id) {
 		boolean result=false;
-		String sql="UPDATE c5_db.user SET "+fieldName+"=? WHERE id=?";
+		String sql="UPDATE user SET "+fieldName+"=? WHERE id=?";
 		try(Connection connection=getConnection();
 			PreparedStatement pstmt=connection.prepareStatement(sql);){
 			connection.setAutoCommit(false);
@@ -74,31 +74,37 @@ public class RootDAO extends DAO {
 	public boolean updatePass(String newPass,String id) {
 		return update("pass",newPass,id);
 	}
-	public boolean delete(String id) {
+	public boolean delete(String id)throws Exception {
 		boolean result=false;
-		String sql="DELETE FROM testroot WHERE id=?";
+		String selectSql="SELECT COUNT(*) FROM root";
+		String deleteSql="DELETE FROM root WHERE id=?";
 		try(Connection connection=getConnection();
-			PreparedStatement pstmt=connection.prepareStatement(sql);){
+			PreparedStatement selectPstmt=connection.prepareStatement(selectSql);
+			PreparedStatement deletePstmt=connection.prepareStatement(deleteSql)){
 			connection.setAutoCommit(false);
 			
-			pstmt.setString(1,id);
+			ResultSet rs=selectPstmt.executeQuery();
+			if(rs.getInt(1)<=1) {
+				connection.rollback();
+				return false;
+			}
 			
-			int line=pstmt.executeUpdate();
-			if(line>0) {
+			deletePstmt.setString(1,id);
+			int line=deletePstmt.executeUpdate();
+			if(line==0) {
 				connection.commit();
 				result=true;
 			}else {
 				connection.rollback();
 			}
+			
 			connection.setAutoCommit(true);
-		}catch (Exception e) {
-			result=false;
 		}
 		return result;
 	}
 	public int count(String keyword)throws Exception{
 		int count=0;
-		String sql="SELECT * FROM testroot name=?";
+		String sql="SELECT * FROM root name=?";
 		try(Connection connection=getConnection();
 			PreparedStatement pstmt=connection.prepareStatement(sql)){
 			pstmt.setString(1,"%"+keyword+"%");
@@ -112,7 +118,7 @@ public class RootDAO extends DAO {
 	}
 	public List<RootBean> search(String keyword,int page){
 		List<RootBean> rootList=new ArrayList<RootBean>();
-		String sql="DELETE FROM c5_db.root WHERE name=?";
+		String sql="DELETE FROM root WHERE name=?";
 		try(Connection connection=getConnection();
 			PreparedStatement pstmt=connection.prepareStatement(sql);){
 			pstmt.setString(1,keyword);

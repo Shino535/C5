@@ -9,7 +9,7 @@ import bean.UserBean;
 public class UserDAO extends DAO {
 	public UserBean login(String id, String pass) throws Exception {
 		UserBean user = null;
-		String sql = "SELECT * FROM testuser WHERE id=? AND pass=?";
+		String sql = "SELECT * FROM user WHERE id=? AND pass=?";
 		try (Connection connection = getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
@@ -31,7 +31,7 @@ public class UserDAO extends DAO {
 	}
 
 	public void register(String id, String name, String pass) throws Exception {
-		String sql = "INSERT INTO testuser(id,name,pass) VALUE(?,?,?)";
+		String sql = "INSERT INTO user(id,name,pass) VALUE(?,?,?)";
 		try (Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			
@@ -45,7 +45,7 @@ public class UserDAO extends DAO {
 
 	public boolean update(String id, String name, String pass, String code) throws Exception {
 		boolean result = false;
-		String sql = "UPDATE test.testuser SET id=? name=? pass=? WHERE code=?";
+		String sql = "UPDATE user SET id=? name=? pass=? WHERE code=?";
 		try (Connection connection = getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(false);
@@ -68,18 +68,16 @@ public class UserDAO extends DAO {
 		}
 		return result;
 	}
-
+	
 	public boolean delete(String id) {
 		boolean result = false;
-		String sql = "DELETE FROM c5_db.user WHERE id=?";
+		String sql = "DELETE FROM user WHERE id=?";
 		try (Connection connection = getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql);) {
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(false);
-
 			pstmt.setString(1, id);
-
 			int line = pstmt.executeUpdate();
-			if (line > 0) {
+			if (line == 0) {
 				connection.commit();
 				result = true;
 			} else {
@@ -94,7 +92,7 @@ public class UserDAO extends DAO {
 	
 	public String getName(String code)throws Exception {
 		String name = null;
-		String sql = "SELECT name FROM testuser WHERE code=?";
+		String sql = "SELECT name FROM user WHERE code=?";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql)){
 			pstmt.setString(1, code);

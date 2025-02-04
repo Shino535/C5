@@ -46,8 +46,8 @@ public class JobExperienceRegisterAction extends Action {
 				experienceList = experienceDAO.getExperience(job_code);
 				setError(request, "体験談投稿に成功", comment, job, experienceList);
 				request.setAttribute("job_name", job_name);
-				request.setAttribute("job_name", job_name);
-				return "/jobDetails.jsp";
+				response.sendRedirect("/C5/Job.action?code=" + job_code);
+				return null;
 			}catch (SQLIntegrityConstraintViolationException e) {
 				String error = e.getMessage();
 				if(error.contains("FOREIGN KEY")) {

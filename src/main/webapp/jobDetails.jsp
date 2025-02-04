@@ -2,7 +2,6 @@
 
 <%@include file="/header_footer/header.jsp"%>
 
-<hr>
 <c:choose>
 	<c:when test="${job != null}">
 		<h4>求人情報詳細</h4>

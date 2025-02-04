@@ -30,9 +30,9 @@ public class ExperienceDeleteAction extends Action {
 		String[] codes = request.getParameterValues("code");
 		// JobExperienceDAO のインスタンスを生成します。
 		JobExperienceDAO experienceDAO = new JobExperienceDAO();
-
+		
 		boolean result = false;
-
+		
 		// 削除対象のコードが存在する場合、削除処理を実行します。
 		if (codes != null && codes.length > 0) {
 			List<String> codeList = Arrays.asList(codes);
@@ -41,7 +41,7 @@ public class ExperienceDeleteAction extends Action {
 				result = experienceDAO.delete(code); // 修正: deleteExperience メソッドは削除件数を返す
 			}
 		}
-
+		
 		// 削除に失敗した場合の処理
 		if (result == false) {
 			// 体験談一覧を取得します。
@@ -53,8 +53,8 @@ public class ExperienceDeleteAction extends Action {
 			// 体験談一覧画面へ遷移します。
 			return "experienceList.jsp";
 		}
-
+		
 		// 削除に成功した場合、削除完了画面へ遷移します。
-		return "experienceDeleteSuccess.jsp";
+		return "experienceDeleteSucces.jsp";
 	}
 }

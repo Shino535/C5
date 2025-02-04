@@ -14,7 +14,6 @@ public class UpdateInputAction extends Action {
 		String code = request.getParameter("code");
 		
 		//■DAOのsearchメソッドを呼びだしてBDにアクセスし、searchメソッドの戻り値で検索結果を返す
-		//SELECT文のLIKEなどで複数のレコードを返す場合は、List型で受け取る（searchメソッド内でArrayListに格納し戻り値で返している）
 		JobDAO dao = new JobDAO();
 		JobBean jobBean = dao.getJob(code);
 		
