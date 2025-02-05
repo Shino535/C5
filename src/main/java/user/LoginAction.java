@@ -25,7 +25,7 @@ public class LoginAction extends Action{
 		
 		HttpSession session=request.getSession();
 		session.setAttribute("user",user);
-		
+		session.setAttribute("result",true);
 		response.sendRedirect("/C5");
 		return null;
 	}

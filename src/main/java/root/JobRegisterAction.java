@@ -40,7 +40,7 @@ public class JobRegisterAction extends Action {
 		}
 		
 		// 2. 文字数チェック
-		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50) {
+		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50 || benefitStr.length() > 11 || holidayStr.length() > 11) {
 			setError(request, "文字数が多いです", company, prefecture, address, job_type, benefitStr, holidayStr, employment);
 			return "jobRegister.jsp"; // フォームに戻る
 		}

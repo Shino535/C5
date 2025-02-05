@@ -21,7 +21,7 @@
 	<input type="hidden" name="code" value="${jobBean.code}" />
 
 	<p>
-		会社名<input type="text" name="company" value="${company != null ? company : jobBean.company}">
+		会社名<input type="text" name="company" value="${jobBean.company}">
 	</p>
 	<p>
 		所在地<select name="prefecture">

@@ -44,7 +44,7 @@ public class JobUpdateAction extends Action {
 		}
 
 		// 2. 文字数チェック
-		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50) {
+		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50 || s_benefit.length() > 8 ) {
 			setError(request, "文字数が多いです", company, prefecture, address, job_type, s_benefit, s_holiday, employment);
 			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
@@ -71,6 +71,13 @@ public class JobUpdateAction extends Action {
 			setError(request, "年間休日は半角数字で入力してください", company, prefecture, address, job_type, s_benefit, s_holiday,
 					employment);
 			return "jobUpdateInput.jsp";
+		}
+		
+		// 4. 年間休日を366以上入力できないようにする処理
+		holiday = Integer.parseInt(s_holiday);
+		if (holiday >= 366 ) {
+			setError(request, "年間休日は365以下の半角数字で入力してください", company, prefecture, address, job_type, s_benefit, s_holiday, employment);
+			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
 
 		// 5.PDFファイルのアップロード処理
@@ -126,11 +133,6 @@ public class JobUpdateAction extends Action {
 		pdf = "pdf/" + lastFileName;
 
 		// 更新処理
-		//■DAOのsearchメソッドを呼びだしてBDにアクセスし、searchメソッドの戻り値で検索結果を返す
-		//SELECT文のLIKEなどで複数のレコードを返す場合は、List型で受け取る（searchメソッド内でArrayListに格納し戻り値で返している）
-
-
-
 		boolean result = dao.update(company, prefecture, address, job_type, s_benefit, s_holiday,
 				employment, pdf, code);
 
@@ -153,8 +155,6 @@ public class JobUpdateAction extends Action {
 		request.setAttribute("benefit", benefit);
 		request.setAttribute("holiday", holiday);
 		request.setAttribute("employment", employment);
-
-
 
 	}
 

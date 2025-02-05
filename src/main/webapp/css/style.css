@@ -17,7 +17,9 @@
 	--accent-color: #009EA9;
 	--main-black: #000000;
 	--main-white: #ffffff;
+	--main-gray: #a9a9a9;
 	--material-shadow: 0 2px 6px 0 #20212447;
+	--material-shadow-right: 0 2px 2px 0 #20212447;
 	--hover-color: #E6E7E7CC;
 	--font-smart: smart-ui;
 	--font-corp: corp-logo;
@@ -42,7 +44,36 @@ textarea{
 h1{
 	margin: 0;
 }
+a{
+	text-decoration: none;
+}
 /*====================全部====================*/
+/*====================ボタン====================*/
+.button-icon{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	padding: 8px;
+	line-height: 0;
+	cursor: pointer;
+	text-decoration: none;
+}
+.button-s{
+	width: 120px;
+	height: 40px;
+	border-radius: 15px;
+	padding: .5rem;
+	text-align: center;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	background-color: var(--accent-color);
+	color: var(--main-white);
+}
+.button-icon:hover{
+	background-color: var(--hover-color);
+}
+/*====================ボタン====================*/
 /*===============================共通===============================*/
 
 /*===============================ヘッダー===============================*/
@@ -52,33 +83,89 @@ header{
 	height: 5rem;
 	box-shadow: var(--material-shadow);
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
+	position: relative;
+	width: 100%;
 }
 header>*{
 	color: var(--main-black);
 }
 header a{
-	text-decoration: none;
-	color: var(--main-black);
+	display: inline-block;
 }
 header a:visited{
 	text-decoration: none;
+}
+/*====================ナビバー====================*/
+#nav-user{
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+#nav-user:hover{
+	background-color: var(--hover-color);
+}
+.nav-bar{
+	display: flex;
+	text-align: center;
+	align-items: center;
+	margin-right: 5%;
+	gap: 1rem;
+}
+#user-menu{
+	position: absolute;
+	z-index: 9999;
+	top: 90px;
+	right: 5%;
+	flex-direction: column;
+	background-color: var(--main-white);
+	gap: 1rem;
+	padding: 1rem;
+	box-shadow: var(--material-shadow);
+	border-radius: 10px;
+	align-items: center;
+}
+.nav-bar>*{
 	color: var(--main-black);
 }
-.title{
+.name{
+	width: 140px;
 	white-space: nowrap;
-	font-family: "corp-logo";
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+}
+/*====================ナビバー====================*/
+/*====================タイトルロゴ====================*/
+.title{
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	font-size: 15px;
+	justify-content: center;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.title>*{
 	user-select: none;
 }
-.title>h1{
-	margin: 0;
-	padding: 0;
-	font-size: 35px;
+.title-logo{
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
 }
+.title-text{
+	display: flex;
+	flex-direction: column;
+	font-family: "corp-logo", sans-serif;
+	font-weight: bold;
+}
+.title-top{
+	font-size: 20px;
+}
+.title-bottom{
+	font-size: 14px;
+	color: var(--accent-color);
+}
+/*====================タイトルロゴ====================*/
 /*===============================ヘッダー===============================*/
 
 /*===============================メインコンテンツ===============================*/
@@ -86,10 +173,10 @@ main{
 	display: flex;
 	justify-content: center;
 }
-/*====================index.jsp====================*/
+/*====================トップページ====================*/
 /*===========検索===========*/
 .search-container{
-	width: 100%;
+	width: 70%;
 	display: flex;
 	justify-content: center;
 }
@@ -100,32 +187,131 @@ main{
 	font-weight: bold;
 	font-size: 50px;
 }
-.search-form{
-	background-color: red;
-	width: 80%;
-	position: absolute;
-	top: 200px;
-}
 .search-img{
 	box-shadow: var(--material-shadow);
 }
+.search-form{
+	background-color: var(--main-white);
+	width: 60%;
+	position: absolute;
+	top: 200px;
+	border-radius: 20px;
+	box-shadow: var(--material-shadow);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+}
+.column{
+	display: flex;
+}
+.column select,.column input[type="text"]{
+	height: 2rem;
+	border-radius: 10px;
+	border: var(--main-gray);
+}
+.column1 input[type="text"]{
+	width: 100%;
+}
 /*===========検索===========*/
-/*====================index.jsp====================*/
+/*====================トップページ====================*/
+/*====================検索結果====================*/
+.jobsearch-list{
+	display: flex;
+	flex-direction: column;
+	
+}
+/*====================検索結果====================*/
+/*====================就活体験談削除====================*/
+.experience-container {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: 80%;
+	max-width: 700px;
+}
+.experience-container>h2{
+	margin: 0;
+	margin-top: 1rem;
+}
+.experience-container>h4{
+	margin: 0;
+	margin-bottom: 1rem;
+	color: red;
+}
+.experience-list{
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.experience-row {
+	display: flex;
+	text-align: start;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+}
+.experience-check{
+	display: flex;
+	padding: .5rem;
+	align-items: center;
+}
+.experience-info{
+	display: flex;
+	flex-direction: column;
+}
+.experience-company{
+	font-weight: bold;
+}
+.experience-name{
+	font-size: small;
+}
+.experience-delete {
+	margin: 1rem auto;
+	padding: 1rem;
+	border-radius: 15px;
+	width: 15rem;
+	background: red;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+/*====================就活体験談削除====================*/
 /*===============================メインコンテンツ===============================*/
 
 /*===============================フッター===============================*/
 footer>*{
-	max-width: 100%;
 	overflow: hidden;
 	white-space: nowrap;
-	color: var(--main-white);
 }
 footer{
 	background-color: var(--main-black);
 	display: flex;
+	flex-direction: column;
 	width: 100%;
-	height: 200px;
+	height: 120px;
 	align-items: center;
+	justify-content: center;
 	margin-top: auto;
+	gap: .5rem;
 }
+.copy{
+	color: var(--main-white);
+}
+/*====================タイトルロゴ====================*/
+.footer-title{
+	display: flex;
+	justify-content: center;
+}
+.footer-title>*{
+	user-select: none;
+}
+footer .title-logo{
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
+}
+footer .title-top{
+	font-size: 20px;
+	color: var(--main-white);
+}
+/*====================タイトルロゴ====================*/
 /*===============================フッター===============================*/

@@ -13,46 +13,89 @@
 	<body>
 		<header>
 			<!-- トップページ -->
-			<div class="title-container">
-				<a href="/C5" class="title">
-					<h1>C5</h1>RECRUIT
-				</a>
-			</div>
+			<a href="/C5" class="title">
+				<img src="/C5/img/hand-black.png" class="title-logo">
+				<div class="title-text">
+					<div class="title-top">C5-RECRUIT</div>
+					<div class="title-bottom">みらいをつなぐ採用</div>
+				</div>
+			</a>
 			
 			<!-- roleで分けるヘッダー -->
-			<div>
+			<div class="nav-bar">
 				<c:choose>
 					<c:when test="${sessionScope.root.role=='root'}">
-						<a href="/C5/root/Register.action">管理者アカウント登録</a>
-						<a href="/C5/root/ExperienceList.action">就活体験談削除</a>
-						<a href="/C5/root/JobRegister.action">求人情報登録</a>
-						<a href="/C5/root/JobList.action">求人情報管理</a>
-						<a href="/C5/Logout.action">ログアウト</a>
+						<a href="/C5/root/ExperienceList.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							contract_delete
+							</span>
+						</a>
+						<a href="/C5/root/JobRegister.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							add_home_work
+							</span>
+						</a>
+						<a href="/C5/Logout.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							logout
+							</span>
+						</a>
+						<a href="/C5/root/JobList.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							edit_square
+							</span>
+						</a>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='user'}">
-						<a href="/C5/Logout.action" class="nav-icon">ログアウト</a>
+						<a href="/C5/Logout.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							logout
+							</span>
+						</a>
 					</c:when>
 					<c:otherwise>
 						<a href="/C5/root/Login.action" class="nav-button">管理者ログイン</a>
-						<a href="/C5/user/Login.action" class="nav-button">利用者ログイン</a>
-						<a href="/C5/user/Register.action" class="nav-button">利用者会員登録</a>
+						<a href="/C5/user/Login.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							login
+							</span>
+						</a>
+						<a href="/C5/user/Register.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							person_add
+							</span>
+						</a>
 					</c:otherwise>
 				</c:choose>
 				
-				<!-- 名前表示 -->
-				<button>
-					<c:choose>
-						<c:when test="${not empty sessionScope.root.name}">
-							<c:out value="${sessionScope.root.name}"/>
-						</c:when>
-						<c:when test="${not empty sessionScope.user.name}">
-							<c:out value="${sessionScope.user.name}"/>
-						</c:when>
-						<c:otherwise>
-							<c:out value="ゲストさん"/>
-						</c:otherwise>
-					</c:choose>
+				<!-- メニューボタン -->
+				<button type="button" id="nav-user" class="button-icon">
+					<span class="material-symbols-rounded">
+					menu
+					</span>
 				</button>
+			</div>
+			<div id="user-menu" class="user-menu" style="display:none;">
+				<c:choose>
+					<c:when test="${sessionScope.root.role=='root'}">
+						<div class="name">
+							<c:out value="${sessionScope.root.name}"/>
+						</div>
+						<a href="/C5/root/Register.action" class="button-s">管理者登録</a>
+						<a href="" class="button-s">利用者BAN</a>
+					</c:when>
+					<c:when test="${sessionScope.user.role=='user'}">
+						<div class="name">
+							<c:out value="${sessionScope.user.name}"/>
+						</div>
+						<a href="/C5/Logout.action" class="button-s">ログアウト</a>
+					</c:when>
+					<c:otherwise>
+						<div class="name">ゲストさん</div>
+						<a class="button-s" href="/C5/user/Login.action">ログイン</a>
+						<a class="button-s" href="/C5/user/Register.action">会員登録</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</header>
 		<main>

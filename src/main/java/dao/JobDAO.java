@@ -12,13 +12,13 @@ import bean.SearchBean;
 public class JobDAO extends DAO {
 	//JobListActinのsearchメソッド（会社名の絞り込み時）
 	public List<JobBean> search(String company) throws Exception {
-
+		
 		//検索結果を入れるArrayListを準備
 		List<JobBean> list = new ArrayList<>();
-
+		
 		//String companyがnullとnull以外のSQL文をsql変数に代入する
 		String sql = "SELECT * FROM job WHERE company LIKE ?";
-
+		
 		try ( //データベースへ接続
 				Connection con = getConnection();
 				//SQLの準備

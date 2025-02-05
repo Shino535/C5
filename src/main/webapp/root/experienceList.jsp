@@ -2,22 +2,34 @@
 
 <%@ include file="/header_footer/header.jsp" %>
 
-<h2>体験談一覧</h2>
-
-<c:if test="${not empty error}">
-    <c:out value="${error}"/>
-</c:if>
-
-<form action="ExperienceConfirm.action" method="post">
-	<c:forEach var="experience" items="${experienceList}">
-		<p>
-			<input type="checkbox" name="code" value="${experience.code}">
-			会社名[${experience.job_name}] | 
-			投稿者[${experience.user_name}] | 
-			コメント[${experience.comment}]
-		</p>
-	</c:forEach>
-	<button type="submit">削除</button>
-</form>
+<div class="experience-container">
+	<h2>体験談一覧</h2>
+	<h4>
+		<c:if test="${not empty error}">
+		    <c:out value="${error}"/>
+		</c:if>
+	</h4>
+	
+	<form action="ExperienceConfirm.action" method="post" class="experience-list">
+		<c:forEach var="experience" items="${experienceList}">
+			<label>
+				<div class="experience-row">
+					<div class="experience-check">
+						<input type="checkbox" name="code" value="${experience.code}">
+					</div>
+					<div class="experience-info">
+						<div class="experience-row-1">
+							<span class="experience-company">会社名:${experience.job_name}</span>
+							${experience.date}
+							<span class="experience-name">投稿者:${experience.user_name}</span>
+						</div>
+						<span class="experience-comment">コメント:${experience.comment}</span>
+					</div>
+				</div>
+			</label>
+		</c:forEach>
+		<button type="submit" class="experience-delete">削除</button>
+	</form>
+</div>
 
 <%@ include file="/header_footer/footer.jsp" %>

@@ -3,10 +3,12 @@
 
 <h1>求人検索結果</h1>
 
-<c:forEach var="job" items="${joblist}">
-	<p><a href="Job.action?code=${job.code}">詳細</a>
-	${job.company}|所在地:${job.prefecture} ${job.address}|職種:${job.job_type}|月収:${job.benefit}|年間休日:${job.holiday}日</p>
-</c:forEach>
+<div class="jobsearch-list">
+	<c:forEach var="job" items="${joblist}">
+		<a href="Job.action?code=${job.code}">詳細</a>
+		${job.company}|所在地:${job.prefecture} ${job.address}|職種:${job.job_type}|月収:${job.benefit}|年間休日:${job.holiday}日
+	</c:forEach>
+</div>
 
 <!-- ページネーションの処理と描画 -->
 <div class="page-container">
