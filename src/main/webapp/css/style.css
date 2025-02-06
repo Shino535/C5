@@ -89,6 +89,15 @@ input[type="password"]:focus{
 	line-height: 0;
 	cursor: pointer;
 	text-decoration: none;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.button-icon:hover{
+	background-color: var(--hover-color);
+	display: inline;
+	opacity: 1;
 }
 .button-s{
 	width: 120px;
@@ -103,9 +112,6 @@ input[type="password"]:focus{
 	color: var(--main-white);
 	font-weight: bold;
 	font-size: 15px;
-}
-.button-icon:hover{
-	background-color: var(--hover-color);
 }
 .button-sbmt{
 	border: none;

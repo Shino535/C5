@@ -43,30 +43,28 @@
 							add_home_work
 							</span>
 						</a>
-						<a href="/C5/Logout.action" class="button-icon">
-							<span class="material-symbols-rounded">
-							logout
-							</span>
-						</a>
 						<a href="/C5/root/JobList.action" class="button-icon">
 							<span class="material-symbols-rounded">
 							edit_square
 							</span>
 						</a>
-					</c:when>
-					<c:when test="${sessionScope.user.role=='user'}">
 						<a href="/C5/Logout.action" class="button-icon">
 							<span class="material-symbols-rounded">
 							logout
 							</span>
 						</a>
-						<!-- ★ 追加: アカウント退会ボタン -->
+					</c:when>
+					<c:when test="${sessionScope.user.role=='user'}">
 						<a href="/C5/user/userWithdrawConfirm.jsp" class="button-icon">
 							<span class="material-symbols-rounded">
 							delete
 							</span>
 						</a>
-						<!-- ★ 追加ここまで -->
+						<a href="/C5/Logout.action" class="button-icon">
+							<span class="material-symbols-rounded">
+							logout
+							</span>
+						</a>
 					</c:when>
 					<c:otherwise>
 						<a href="/C5/root/Login.action" class="nav-button">管理者ログイン</a>
