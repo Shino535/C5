@@ -28,7 +28,7 @@
 				</div>
 			</label>
 		</c:forEach>
-		<button type="submit" class="experience-delete">削除</button>
+		<input type="submit" value="削除" class="experience-delete">
 	</form>
 </div>
 

@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <%@taglib prefix="fn" uri="jakarta.tags.functions"%>
 <%@taglib prefix="sql" uri="jakarta.tags.sql"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -20,6 +21,13 @@
 					<div class="title-bottom">みらいをつなぐ採用</div>
 				</div>
 			</a>
+			
+			<!-- ★ 追加: ログイン成功メッセージを表示 -->
+			<c:if test="${not empty sessionScope.loginMessage}">
+			    <p style="color: green; font-weight: bold; text-align: center;">${sessionScope.loginMessage}</p>
+			    <c:remove var="loginMessage" scope="session"/> <%-- メッセージを1回表示したら削除 --%>
+			</c:if>
+			<!-- ★ 追加ここまで -->
 			
 			<!-- roleで分けるヘッダー -->
 			<div class="nav-bar">
@@ -52,6 +60,13 @@
 							logout
 							</span>
 						</a>
+						<!-- ★ 追加: アカウント退会ボタン -->
+						<a href="/C5/user/userWithdrawConfirm.jsp" class="button-icon">
+							<span class="material-symbols-rounded">
+							delete
+							</span>
+						</a>
+						<!-- ★ 追加ここまで -->
 					</c:when>
 					<c:otherwise>
 						<a href="/C5/root/Login.action" class="nav-button">管理者ログイン</a>
@@ -82,12 +97,13 @@
 							<c:out value="${sessionScope.root.name}"/>
 						</div>
 						<a href="/C5/root/Register.action" class="button-s">管理者登録</a>
-						<a href="" class="button-s">利用者BAN</a>
+						<a href="/C5/root/UserDeleteList.action" class="button-s">利用者BAN</a>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='user'}">
 						<div class="name">
 							<c:out value="${sessionScope.user.name}"/>
 						</div>
+						<a href="/C5/user/UserUpdate.action" class="button-s">アカウント情報更新</a>
 						<a href="/C5/Logout.action" class="button-s">ログアウト</a>
 					</c:when>
 					<c:otherwise>

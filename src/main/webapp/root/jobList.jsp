@@ -15,7 +15,7 @@
 	<c:forEach var="p" items="${list}">
 		<tr>
 			<form action="UpdateInput.action" method="post">
-				<td><input type="hidden" name="code" value="${p.code}" />会社名：${p.company}所在地：${p.address}</td>
+				<td><input type="hidden" name="code" value="${p.code}" />会社名：${p.company}&nbsp;&nbsp;所在地：${p.address}</td>
 				<td><input type="submit" value="更新"></td>
 			</form>
 			<form action="JobDeleteSelect.action" method="post">

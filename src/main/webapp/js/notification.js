@@ -1,16 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
-	function fadeOutNotification(id) {
-		let notification = document.getElementById(id);
-		if (notification) {
+	function fadeOutNotification(element) {
+		setTimeout(() => {
+			element.style.transition = "opacity 1s ease-out";
+			element.style.opacity = "0";
 			setTimeout(() => {
-				notification.style.transition = "opacity 1s ease-out";
-				notification.style.opacity = "0";
-				setTimeout(() => {
-					notification.style.display = "none";
-				}, 1000);
-			}, 2000);
-		}
+				element.style.display = "none";
+			}, 1000);
+		}, 2000);
 	}
-	fadeOutNotification("dbConError");
-	fadeOutNotification("logoutMsg");
+	document.querySelectorAll(".notification").forEach(fadeOutNotification);
 });

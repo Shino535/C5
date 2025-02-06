@@ -31,8 +31,8 @@ public class RegisterAction extends Action{
 			setError(request,"名前は20文字以下で入力してください",id,name,pass);
 			return "register.jsp";
 		}
-		if(!Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z]).{15,}$").matcher(pass).matches()) {
-			setError(request,"パスワードは英数字混在、15文字以上で入力してください",id,name,pass);
+		if(!Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z]).{15,256}$").matcher(pass).matches()) {
+			setError(request,"パスワードは英数字混在、15~256以上で入力してください",id,name,pass);
 			return "register.jsp";
 		}
 		

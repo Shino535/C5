@@ -27,6 +27,8 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);
 		}catch(SQLException|NamingException e) {
 			System.err.printf("%s%n",e);
+			e.printStackTrace();
+			
 			HttpSession session=request.getSession();
 			session.setAttribute("dbConError","データベースになんらかの問題が発生しました");
 			response.sendRedirect("/C5");
