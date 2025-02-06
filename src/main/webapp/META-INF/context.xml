@@ -5,7 +5,7 @@
 		type="javax.sql.DataSource"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://192.168.33.117:3306/c5_db"
-		username="root"
+		username="c5"
 		password="password"
 	/>
 </Context>
