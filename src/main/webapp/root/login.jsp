@@ -1,9 +1,8 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@include file="/header_footer/header.jsp"%>
 
 <div class="login-container">
-	<div class="login-title">ログイン</div>
+	<div class="login-title">管理者用ログイン</div>
 	<c:if test="${not empty error}">
 		${error}
 	</c:if>
@@ -26,8 +25,5 @@
 		</div>
 	</form>
 </div>
-
-<script src="/C5/js/login.js"></script>
-<script src="/C5/js/togglepass.js"></script>
 
 <%@include file="/header_footer/footer.jsp"%>

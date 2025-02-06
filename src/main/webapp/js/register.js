@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	const inputNAME = document.getElementById("name");
 	const inputPASS = document.getElementById("pass");
 	const submitButton = document.getElementById("submitBtn");
-	
 	function checkInput() {
 		let isValid = true;
 		[inputID, inputNAME, inputPASS].forEach(input => {

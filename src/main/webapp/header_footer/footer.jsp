@@ -11,5 +11,11 @@
 			<div class="copy">©2025 ProjectC5-RECRUIT</div>
 		</footer>
 		<script src="/C5/js/nav-menu.js"></script>
+		<script src="/C5/js/notification.js"></script>
+		<script src="/C5/js/register.js"></script>
+		<script src="/C5/js/togglepass.js"></script>
+		<script src="/C5/js/login.js"></script>
+		<script src="/C5/js/text-width.js"></script>
+		<script src="/C5/js/jobadd.js"></script>
 	</body>
 </html>

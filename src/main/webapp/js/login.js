@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				input.style.border = "2px solid red";
 				isValid = false;
 			} else {
-			    input.style.border = "";
+				input.style.border = "";
 			}
 		});
 		submitButton.disabled = !isValid;
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 	[inputID, inputPASS].forEach(input => {
-	    input.addEventListener("input", checkInput); // 入力時にチェックを実行
+		input.addEventListener("input", checkInput); // 入力時にチェックを実行
 	});
 	checkInput();
 });

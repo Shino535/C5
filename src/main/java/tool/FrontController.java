@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 public class FrontController extends HttpServlet {
 	public void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
 		try {
-			System.out.printf("FrontController通過%n");//デバッグ用
+			System.out.printf("FrontController通過%n");
 			
 			String path=request.getServletPath().substring(1);
 			String name=path.replace(".a","A").replace('/','.');
@@ -27,10 +27,8 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);
 		}catch(SQLException|NamingException e) {
 			System.err.printf("%s%n",e);
-			e.printStackTrace();
-			
 			HttpSession session=request.getSession();
-			session.setAttribute("dbConError","データベースになんらかの問題が発生しました");
+			session.setAttribute("dbConError","データベースエラー");
 			response.sendRedirect("/C5");
 		}catch (NullPointerException e) {
 			System.err.printf("nullだけど問題ないよ%n");

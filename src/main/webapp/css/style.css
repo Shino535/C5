@@ -38,7 +38,7 @@
 	--material-shadow-right: 0 2px 2px 0 #20212447;
 	--hover-color: #E6E7E7CC;
 	
-	--text-grey: #5e5e5e;
+	--text-gray: #5e5e5e;
 	
 	--font-smart: "smart-ui";
 	--font-corp-b: "corp-bold";
@@ -397,7 +397,7 @@ main{
 .jobsearch-row4{
 	display: flex;
 	gap: 1rem;
-	color: var(--text-grey);
+	color: var(--text-gray);
 	align-items: center;
 	text-align: center;
 	height: 20px;
@@ -623,6 +623,97 @@ main{
 	font-size: 15px;
 }
 /*====================就活体験談削除====================*/
+/*====================求人登録====================*/
+.jobadd-container{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	max-width: 700px;
+}
+.jobadd-error{
+	color: red;
+	font-family: var(--font-corp-m);
+}
+.jobadd-title{
+	font-family: var(--font-corp-b);
+	font-size: 25px;
+	margin-top: 2rem;
+}
+.jobadd-subtitle{
+	font-family: var(--font-corp-m);
+	font-size: 15px;
+	display: flex;
+	margin: auto;
+}
+.jobadd-container form{
+	width: 600px;
+}
+.jobadd-form{
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	background-color: var(--main-white);
+	box-shadow: var(--material-shadow);
+	padding: 1rem;
+	border-radius: 10px;
+	max-width: 600px;
+	min-width: 600px;
+	gap: 1rem;
+}
+.jobadd-rowtitle{
+	font-family: var(--font-corp-m);
+	font-size: 15px;
+}
+.jobadd-row{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.jobadd-row input[type="text"],
+.jobadd-row select{
+	padding: .5rem;
+	border-radius: 15px;
+	border: 1px solid var(--main-gray);
+	height: 32px;
+}
+.jobadd-row select{
+	width: 150px;
+}
+.jobadd-company,
+.jobadd-jobtype{
+	width: 450px;
+}
+.jobadd-address-row{
+	position: relative;
+}
+.jobadd-prefecture{
+	border-radius: 15px 0 0 15px !important;
+	position: absolute;
+	right: 300px;
+}
+.jobadd-address{
+	border-radius: 0 15px 15px 0 !important;
+	width: 300px;
+}
+.jobadd-inline{
+	display: flex;
+	justify-content: space-between;
+}
+.jobadd-inline input[type="text"],
+.jobadd-inline select{
+	width: 250px;
+	padding: .5rem;
+	border-radius: 15px;
+	border: 1px solid var(--main-gray);
+	height: 32px;
+}
+.jobadd-submit{
+	margin: auto;
+}
+/*====================求人登録====================*/
 /*===============================メイン===============================*/
 
 /*===============================フッター===============================*/

@@ -38,7 +38,4 @@
 	</c:otherwise>
 </c:choose>
 
-<script src="/C5/js/register.js"></script>
-<script src="/C5/js/togglepass.js"></script>
-
 <%@include file="/header_footer/footer.jsp"%>
