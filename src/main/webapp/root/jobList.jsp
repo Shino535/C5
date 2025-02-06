@@ -3,27 +3,27 @@
 
 <%@include file="/header_footer/header.jsp"%>
 
-<h1>求人情報一覧</h1>
-
-<form action="JobList.action" method="post">
-	<input type="text" name="company"> <input type="submit"
-		value="会社名で絞り込み">
-</form>
-<hr>
-
-<table style="border-collapse: separate; border-spacing: 10px;">
+<div class="joblist-container">
+	<div class="joblist-title">求人情報一覧</div>
+	<form action="JobList.action" method="post">
+		<div class="joblist-search">
+			<input type="text" name="company">
+			<input type="submit" value="会社名で絞り込み" class="button-s joblist-button">
+		</div>
+	</form>
 	<c:forEach var="p" items="${list}">
-		<tr>
+		<div class="joblist-row">
+			会社名：${p.company}&nbsp;&nbsp;所在地：${p.address}
 			<form action="UpdateInput.action" method="post">
-				<td><input type="hidden" name="code" value="${p.code}" />会社名：${p.company}&nbsp;&nbsp;所在地：${p.address}</td>
-				<td><input type="submit" value="更新"></td>
+				<input type="hidden" name="code" value="${p.code}"/>
+				<input type="submit" value="更新">
 			</form>
 			<form action="JobDeleteSelect.action" method="post">
-				<td><input type="hidden" name="code" value="${p.code}" /></td>
-				<td><input type="submit" value="削除"></td>
+				<input type="hidden" name="code" value="${p.code}"/>
+				<input type="submit" value="削除">
 			</form>
-		</tr>
+		</div>
 	</c:forEach>
-</table>
+</div>
 
 <%@include file="/header_footer/footer.jsp"%>
