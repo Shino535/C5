@@ -83,6 +83,7 @@ input[type="text"]{
 input[type="text"]:focus,
 input[type="password"]:focus{
 	border: 1px solid var(--main-gray);
+	outline: none;
 }
 .icon{
 	user-select: none;
@@ -105,7 +106,7 @@ input[type="password"]:focus{
 }
 .button-icon:hover{
 	background-color: var(--hover-color);
-	display: inline;
+	display: flex;
 	opacity: 1;
 }
 .button-s{
@@ -184,6 +185,23 @@ header a:visited{
 	align-items: center;
 	margin-right: 5%;
 	gap: 1rem;
+}
+.nav-button-icon{
+	color: var(--main-black);
+}
+.nav-icon{
+	position: relative;
+}
+.icon-text{
+	display: none;
+	position: absolute;
+	top: 100%;
+	white-space: nowrap;
+	font-family: var(--font-koruri-b);
+	font-size: 10px;
+}
+.nav-icon:hover .icon-text {
+	display: block;
 }
 #user-menu{
 	position: absolute;
@@ -291,17 +309,16 @@ main{
 	height: 450px;
 	user-select: none;
 }
-.search-form{
+.search-container form{
 	background-color: var(--main-white);
-	width: 60%;
-	min-width: 620px;
+	width: 650px;
+	min-width: 650px;
 	height: 290px;
-	max-width: 750px;
 	position: absolute;
 	top: 200px;
 	border-radius: 20px;
 	box-shadow: var(--material-shadow);
-	padding: 2rem;
+	padding: 1rem;
 	display: flex;
 	flex-direction: column;
 }
@@ -315,11 +332,6 @@ main{
 	display: flex;
 	align-items: center;
 	margin-bottom: 1rem;
-}
-.column input[type="text"]{
-	padding: .5rem;
-	border-radius: 15px;
-	border: 1px solid var(--main-gray);
 }
 .column select{
 	padding: .5rem;
@@ -351,9 +363,7 @@ main{
 	margin-left: 2rem;
 }
 .search-button{
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	margin: auto;
 }
 /*===========検索===========*/
 /*====================トップページ↑====================*/
@@ -366,10 +376,13 @@ main{
 	align-items: center;
 	margin-top: 2rem;
 	gap: 1rem;
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: var(--material-shadow);
 }
 .logout-title{
-	font-family: var(--font-kakumei);
-	font-size: 25px;
+	font-family: var(--font-corp-b);
+	font-size: 20px;
 }
 .logout-button{
 	background-color: red !important;
@@ -853,6 +866,7 @@ main{
 	width: 80%;
 	max-width: 700px;
 	gap: 1rem;
+	margin-bottom: 3rem;
 }
 .joblist-title{
 	font-family: var(--font-corp-b);
@@ -907,9 +921,56 @@ main{
 .jobupdate-container{
 	display: flex;
 	flex-direction: column;
-	width: 700px;
+	justify-content: center;
+	width: 602.88px;
+}
+.jobupdate-form{
+	min-width: 602.88px;
+	width: 602.88px;
+	display: flex;
+	flex-direction: column;
+}
+.jobupdate-button{
+	margin: auto;
+	margin-top: 1rem;
 }
 /*====================求人情報更新====================*/
+/*====================求人情報削除====================*/
+.jobdelete{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	gap: .5rem;
+	margin-top: 1rem;
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: var(--material-shadow);
+	width: 400px;
+}
+.jobdelete-subtitle{
+	font-family: var(--font-koruri-b);
+}
+.jobdelete-info{
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+}
+.jobdelete-text{
+	width: 360px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.jobdelete-button{
+	display: flex;
+	gap: 3rem;
+	margin: auto;
+}
+.jobdelete h2{
+	margin: 0;
+}
+/*====================求人情報削除====================*/
 /*====================利用者アカウント退会====================*/
 .userwithdraw-container{
 	display: flex;

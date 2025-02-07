@@ -3,6 +3,7 @@ package root;
 import dao.JobDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
 public class JobDeleteAction extends Action{
@@ -14,12 +15,15 @@ public class JobDeleteAction extends Action{
 		//SELECT文のLIKEなどで複数のレコードを返す場合は、List型で受け取る（searchメソッド内でArrayListに格納し戻り値で返している）
 		JobDAO dao = new JobDAO();
 		boolean result = dao.delete(code);
-
+		HttpSession session=request.getSession();
 		if (result == true) {
-			return "jobDeleteSuccess.jsp";//更新成功画面
+			session.setAttribute("jobdelete_t","求人の削除に成功");
+			response.sendRedirect("/C5/root/JobList.action");
+			return null;
 		} else {
-			request.setAttribute("errorMessage", "更新に失敗しました。もう一度お試しください。");
-			return "jobList.jsp"; // 求人情報一覧画面に遷移
+			session.setAttribute("jobdelete_f","求人の削除に失敗");
+			response.sendRedirect("/C5/root/JobList.action");
+			return null;
 		}
 	}
 }

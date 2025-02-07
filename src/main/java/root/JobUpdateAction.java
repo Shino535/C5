@@ -15,7 +15,6 @@ import tool.Action;
 
 public class JobUpdateAction extends Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		// フォームから送信されたパラメータを取得
 		String company = request.getParameter("company");
 		String prefecture = request.getParameter("prefecture");
@@ -34,7 +33,6 @@ public class JobUpdateAction extends Action {
 		JobDAO dao = new JobDAO();
 		JobBean jobBean = dao.getJob(code);
 		request.setAttribute("jobBean", jobBean);
-
 		// 1. 空白チェック
 		if (company.isBlank() || prefecture.isBlank() || address.isBlank() || job_type.isBlank() || s_benefit.isBlank()
 				|| s_holiday.isBlank() || employment.isBlank()) {
@@ -42,13 +40,13 @@ public class JobUpdateAction extends Action {
 					employment);
 			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
-
+		
 		// 2. 文字数チェック
 		if (company.length() > 100 || address.length() > 100 || job_type.length() > 50 || s_benefit.length() > 8 ) {
 			setError(request, "文字数が多いです", company, prefecture, address, job_type, s_benefit, s_holiday, employment);
 			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
-
+		
 		// 3. benefitとholidayの数字チェック
 		if (s_benefit.matches("[0-9]+")) {
 			benefit = Integer.parseInt(s_benefit);
@@ -79,19 +77,17 @@ public class JobUpdateAction extends Action {
 			setError(request, "年間休日は365以下の半角数字で入力してください", company, prefecture, address, job_type, s_benefit, s_holiday, employment);
 			return "jobUpdateInput.jsp"; // フォームに戻る
 		}
-
+		
 		// 5.PDFファイルのアップロード処理
 		Part part = request.getPart("pdf");
 		String fileName = part.getSubmittedFileName();
-
+		
 		String fullPath = request.getServletContext().getRealPath("/");
-
-		//		System.out.println(fullPath);
-
+		
 		int metaIndex = fullPath.indexOf(".metadata");
 		String uploadPath = fullPath.substring(0, metaIndex) + "C5/src/main/webapp/pdf/";
 		String lastFileName;
-
+		
 		// 6.PDFファイルエラーハンドリング
 		if (fileName != null && !fileName.isBlank()) {
 			// ファイル名被り対策
@@ -106,7 +102,7 @@ public class JobUpdateAction extends Action {
 			}
 			part.write(uploadPath + lastFileName);
 			pdf = uploadPath + lastFileName;
-
+			
 			// PDFか判別
 			if (!request.getServletContext().getMimeType(pdf).startsWith("application/pdf")) {
 				File uploaFile = new File(pdf);
@@ -115,7 +111,7 @@ public class JobUpdateAction extends Action {
 						s_holiday, employment);
 				return "jobUpdateInput.jsp";
 			}
-
+			
 			// ファイルサイズ判別
 			Path p = Paths.get(pdf);
 			double d = Files.size(p) / 1048576.0;
@@ -131,14 +127,14 @@ public class JobUpdateAction extends Action {
 			return "jobUpdateInput.jsp";
 		}
 		pdf = "pdf/" + lastFileName;
-
+		
 		// 更新処理
-		boolean result = dao.update(company, prefecture, address, job_type, s_benefit, s_holiday,
-				employment, pdf, code);
-
+		boolean result = dao.update(company, prefecture, address, job_type, s_benefit, s_holiday, employment, pdf, code);
+		
 		if (result == true) {
 			return "jobUpdateSuccess.jsp";//更新成功画面
 		} else {
+			System.out.printf("更新失敗:%s%n",code);
 			request.setAttribute("errorMessage", "更新に失敗しました。もう一度お試しください。");
 			return "jobList.jsp"; // 求人情報一覧画面に遷移
 		}

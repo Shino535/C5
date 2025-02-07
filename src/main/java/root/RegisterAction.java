@@ -3,11 +3,9 @@ package root;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.regex.Pattern;
 
-import bean.RootBean;
 import dao.RootDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
 public class RegisterAction extends Action{
@@ -39,12 +37,8 @@ public class RegisterAction extends Action{
 		try {
 			RootDAO rootDAO=new RootDAO();
 			rootDAO.register(id,name,pass);
-			RootBean root=rootDAO.login(id,pass);
-			
-			HttpSession session=request.getSession();
-			session.setAttribute("root",root);
 			request.setAttribute("result",true);
-			
+			request.setAttribute("name", name);
 			return "register.jsp";
 		}catch(SQLIntegrityConstraintViolationException e) {
 			String error=e.getMessage();

@@ -9,7 +9,6 @@ import tool.Action;
 public class UpdateInputAction extends Action {
 	public String execute(
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		//■パラメータをメンバ変数に格納
 		String code = request.getParameter("code");
 		
@@ -19,8 +18,6 @@ public class UpdateInputAction extends Action {
 		
 		//■リクエスト属性のsetAttribute
 		request.setAttribute("jobBean", jobBean);
-
 		return "jobUpdateInput.jsp";
 	}
-
 }

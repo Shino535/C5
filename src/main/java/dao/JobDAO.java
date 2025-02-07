@@ -90,35 +90,33 @@ public class JobDAO extends DAO {
 	public boolean update(String company, String prefecture, String address, String job_type, String s_benefit, String s_holiday, String employment, String pdf, String code) throws Exception {
 		boolean result = false;
 		String sql = "UPDATE job SET company=? , prefecture=? ,address=? ,job_type=? ,benefit=? ,holiday=?, employment=?,pdf_path=? WHERE code=?";
-		try(Connection con = getConnection();
-			PreparedStatement st = con.prepareStatement(sql);) {
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			//データ型の変換
 			int benefit = Integer.parseInt(s_benefit);
 			int holiday = Integer.parseInt(s_holiday);
 			
 			//プレースホルダへ値を入れる
-			st.setString(1, company); // 
-			st.setString(2, prefecture); // 
-			st.setString(3, address); // 
-			st.setString(4, job_type); // 
-			st.setInt(5, benefit); // 
-			st.setInt(6, holiday); // 
-			st.setString(7, employment); // 
-			st.setString(8, pdf); // 
-			st.setString(9, code); // 
+			pstmt.setString(1, company); // 
+			pstmt.setString(2, prefecture); // 
+			pstmt.setString(3, address); // 
+			pstmt.setString(4, job_type); // 
+			pstmt.setInt(5, benefit); // 
+			pstmt.setInt(6, holiday); // 
+			pstmt.setString(7, employment); // 
+			pstmt.setString(8, pdf); // 
+			pstmt.setString(9, code); // 
 			//SQLの実行、結果を取得
-			int count = st.executeUpdate();
+			int count = pstmt.executeUpdate();
 			if (count == 1) {
 				result = true;
 			} else {
 				result = false;
 			}
-		} catch (Exception e) {
-			throw e;
 		}
 		return result;
 	}
-
+	
 	// 全アクターが使える求人検索用のメソッド
 	public List<JobBean> search(SearchBean searchBean, int page) throws Exception {
 		List<JobBean> jobList = new ArrayList<JobBean>();

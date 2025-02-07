@@ -3,7 +3,7 @@
 
 <c:choose>
 	<c:when test="${result}">
-		<p>管理者<c:out value="${user.name}"/>さんの登録が成功しました。</p>
+		<p>管理者<c:out value="${name}"/> さんの登録が成功しました。</p>
 	</c:when>
 	<c:otherwise>
 		<div class="register-container">

@@ -10,6 +10,9 @@
 		<title>C5リクルート</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&" />	
 		<link rel="stylesheet" href="/C5/css/style.css">
+	<!--
+	              きさま！見ているなッ！
+	-->
 	</head>
 	<body>
 		<header>
@@ -33,60 +36,70 @@
 			<div class="nav-bar">
 				<c:choose>
 					<c:when test="${sessionScope.root.role=='root'}">
-						<a href="/C5/root/ExperienceList.action" class="button-icon">
-							<span class="material-symbols-rounded">
+						<a href="/C5/root/ExperienceList.action" class="button-icon nav-button-icon">
+							<span class="material-symbols-rounded icon">
 							contract_delete
 							</span>
+							<div class="icon-text"></div>
 						</a>
-						<a href="/C5/root/JobRegister.action" class="button-icon">
-							<span class="material-symbols-rounded">
+						<a href="/C5/root/JobRegister.action" class="button-icon nav-button-icon">
+							<span class="material-symbols-rounded icon">
 							add_home_work
 							</span>
 						</a>
-						<a href="/C5/root/JobList.action" class="button-icon">
-							<span class="material-symbols-rounded">
+						<a href="/C5/root/JobList.action" class="button-icon nav-button-icon">
+							<span class="material-symbols-rounded icon">
 							edit_square
 							</span>
 						</a>
-						<a href="/C5/Logout.action" class="button-icon">
-							<span class="material-symbols-rounded">
+						<a href="/C5/Logout.action" class="button-icon nav-button-icon">
+							<span class="material-symbols-rounded icon">
 							logout
 							</span>
 						</a>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='user'}">
-						<a href="/C5/user/UserClose.action" class="button-icon">
-							<span class="material-symbols-rounded">
+						<a href="/C5/user/UserClose.action" class="button-icon nav-button-icon">
+							<span class="material-symbols-rounded icon">
 							person_remove
 							</span>
 						</a>
-						<a href="/C5/Logout.action" class="button-icon">
-							<span class="material-symbols-rounded">
+						<a href="/C5/Logout.action" class="button-icon nav-button-icon">
+							<span class="material-symbols-rounded icon">
 							logout
 							</span>
 						</a>
 					</c:when>
 					<c:otherwise>
 						<a href="/C5/root/Login.action" class="nav-button">管理者ログイン</a>
-						<a href="/C5/user/Login.action" class="button-icon">
-							<span class="material-symbols-rounded">
-							login
-							</span>
-						</a>
-						<a href="/C5/user/Register.action" class="button-icon">
-							<span class="material-symbols-rounded">
-							person_add
-							</span>
-						</a>
+						<div class="nav-icon">
+							<a href="/C5/user/Login.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
+								login
+								</span>
+							</a>
+							<div class="icon-text">ログイン</div>
+						</div>
+						<div class="nav-icon">
+							<a href="/C5/user/Register.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
+								person_add
+								</span>
+							</a>
+							<div class="icon-text">会員登録</div>
+						</div>
 					</c:otherwise>
 				</c:choose>
 				
 				<!-- メニューボタン -->
-				<button type="button" id="nav-user" class="button-icon">
-					<span class="material-symbols-rounded">
-					menu
-					</span>
-				</button>
+				<div class="nav-icon">
+					<button type="button" id="nav-user" class="button-icon">
+						<span class="material-symbols-rounded icon">
+						menu
+						</span>
+					</button>
+					<div class="icon-text">メニュー</div>
+				</div>
 			</div>
 			<div id="user-menu" class="user-menu" style="display:none;">
 				<c:choose>

@@ -1,6 +1,19 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/header_footer/header.jsp"%>
 
+<c:choose>
+	<c:when test="${not empty sessionScope.jobdelete_t}">
+		<div class="notification success">${sessionScope.jobdelete_t}</div>
+		<c:remove var="jobdelete_t" scope="session"/>
+	</c:when>
+	<c:when test="${not empty sessionScope.jobdelete_f}">
+		<div class="notification error">${sessionScope.jobdelete_f}</div>
+		<c:remove var="jobdelete_f" scope="session"/>
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+</c:choose>
+
 <div class="joblist-container">
 	<div class="joblist-title">求人情報一覧</div>
 	<form action="JobList.action" method="post">
