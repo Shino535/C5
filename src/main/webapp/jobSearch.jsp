@@ -2,8 +2,8 @@
 <%@include file="/header_footer/header.jsp"%>
 
 <div class="jobsearch-container">
-	<div class="jobsearch-form">
-		<form action="/C5/Search.action" method="get">
+	<form action="/C5/Search.action" method="get">
+		<div class="jobsearch-form">
 			<div class="column1 column">
 				<div class="search-subtitle">会社名</div>
 				<input type="text" name="company" value="${searchList.company}">
@@ -105,8 +105,8 @@
 			<div class="search-button">
 				<button type="submit" class="button-s">検索</button>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 	<div class="jobsearch-title">求人検索結果</div>
 	
 	<!-- ★ 削除済みの求人をクリックした場合のエラーメッセージ -->
@@ -124,8 +124,8 @@
 	<div class="jobsearch-list">
 		<c:forEach var="job" items="${joblist}">
 			<div class="jobsearch-row">
-				<div class="jobsearch-jobtype jobsearch-text">${job.job_type}</div>
 				<div class="jobsearch-company jobsearch-text">${job.company}</div>
+				<div class="jobsearch-jobtype jobsearch-text">${job.job_type}</div>
 				<div class="jobsearch-row3">
 					<div class="jobsearch-prefecture jobsearch-text">${job.prefecture}</div>
 					<div class="jobsearch-address jobsearch-text">${job.address}</div>

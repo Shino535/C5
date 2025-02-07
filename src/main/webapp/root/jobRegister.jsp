@@ -4,14 +4,29 @@
 
 <c:choose>
 	<c:when test="${result}">
-		<c:out value="${error}"/><br>
-		会社名:<c:out value="${company}"/><br>
-		住所:<c:out value="${prefecture}"/>県 
-		<c:out value="${address}"/><br>
-		職種:<c:out value="${job_type}"/><br>
-		月収:<c:out value="${benefit}"/><br>
-		年間休日:<c:out value="${holiday}"/><br>
-		雇用形態:<c:out value="${employment}"/><br>
+		<div class="jobadd-success">
+			<div class="jobadd-success-message">
+				<c:out value="${error}"/>
+			</div>
+			<div class="jobadd-success-row">
+				会社名:<c:out value="${company}"/>
+			</div>
+			<div class="jobadd-success-row">
+				住所:<c:out value="${prefecture}"/><c:out value="${address}"/>
+			</div>
+			<div class="jobadd-success-row">
+				職種:<c:out value="${job_type}"/>
+			</div>
+			<div class="jobadd-success-row">
+				月収:<c:out value="${benefit}"/>
+			</div>
+			<div class="jobadd-success-row">
+				年間休日:<c:out value="${holiday}"/>
+			</div>
+			<div class="jobadd-success-row">
+				雇用形態:<c:out value="${employment}"/>
+			</div>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<div class="jobadd-container">

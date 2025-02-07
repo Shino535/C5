@@ -80,6 +80,10 @@ public class RoleFilter implements Filter{
 			if(uri.contains("/root/")||uri.contains("/Logout")) {
 				chain.doFilter(request,response);
 				return;
+			}else if(uri.contains("/UserClose")) {
+				session.setAttribute("roleerror","権限がありません");
+				httpResponse.sendRedirect("/C5/");
+				return;
 			}else {
 				session.setAttribute("roleerror","権限がありません");
 				httpResponse.sendRedirect("/C5/user/Login.action");
@@ -89,3 +93,5 @@ public class RoleFilter implements Filter{
 		chain.doFilter(request,response);
 	}
 }
+
+

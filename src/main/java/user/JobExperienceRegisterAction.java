@@ -35,11 +35,15 @@ public class JobExperienceRegisterAction extends Action {
 		
 		if(comment.isBlank()) {
 			setError(request, "コメントは必ず入力してください", comment, job, experienceList);
-			return "/jobDetails.jsp";
+			request.setAttribute("job_name", job_name);
+			response.sendRedirect("/C5/Job.action?code=" + job_code);
+			return null;
 		}
-		if(comment.length() > 256) {
-			setError(request, "コメントは256文字以内で入力してください", comment, job, experienceList);
-			return "/jobDetails.jsp";
+		if(comment.length() > 255) {
+			setError(request, "コメントは255文字以内で入力してください", comment, job, experienceList);
+			request.setAttribute("job_name", job_name);
+			response.sendRedirect("/C5/Job.action?code=" + job_code);
+			return null;
 		}else {
 			try {
 				experienceDAO.add(comment, user_code, job_code, user_name, job_name);
@@ -53,6 +57,7 @@ public class JobExperienceRegisterAction extends Action {
 				if(error.contains("FOREIGN KEY")) {
 					setError(request, "体験談投稿エラー", comment, job, experienceList);
 				}
+				response.sendRedirect("/C5/Job.action?code=" + job_code);
 				return "/jobDetails.jsp";
 			}
 		}

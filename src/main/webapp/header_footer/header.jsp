@@ -55,9 +55,9 @@
 						</a>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='user'}">
-						<a href="/C5/user/userWithdrawConfirm.jsp" class="button-icon">
+						<a href="/C5/user/UserClose.action" class="button-icon">
 							<span class="material-symbols-rounded">
-							delete
+							person_remove
 							</span>
 						</a>
 						<a href="/C5/Logout.action" class="button-icon">

@@ -23,7 +23,7 @@ public class ExperienceConfirmAction extends Action {
 		String[] deleteCode = request.getParameterValues("code");
 		
 		// 削除する体験談が選択されていない場合はエラーメッセージを設定し、体験談一覧画面へ戻します。
-		if (deleteCode == null) {
+		if (deleteCode == null || deleteCode.length == 0) {
 			request.setAttribute("error", "一つ以上選択してください");
 			return "ExperienceList.action";
 		}

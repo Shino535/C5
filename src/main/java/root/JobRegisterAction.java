@@ -72,7 +72,7 @@ public class JobRegisterAction extends Action {
 		String fullPath = request.getServletContext().getRealPath("/");
 		
 		int metaIndex = fullPath.indexOf(".metadata");
-		String uploadPath = fullPath.substring(0, metaIndex) + "C5-git/src/main/webapp/pdf/";
+		String uploadPath = fullPath.substring(0, metaIndex) + "C5/src/main/webapp/pdf/";
 		String lastFileName;
 		
 		// 6.PDFファイルエラーハンドリング

@@ -90,7 +90,7 @@ public class JobDAO extends DAO {
 	public boolean update(String company, String prefecture, String address, String job_type, String s_benefit, String s_holiday, String employment, String pdf, String code) throws Exception {
 		boolean result = false;
 		String sql = "UPDATE job SET company=? , prefecture=? ,address=? ,job_type=? ,benefit=? ,holiday=?, employment=?,pdf_path=? WHERE code=?";
-		try (Connection con = getConnection();
+		try(Connection con = getConnection();
 			PreparedStatement st = con.prepareStatement(sql);) {
 			//データ型の変換
 			int benefit = Integer.parseInt(s_benefit);
@@ -214,8 +214,8 @@ public class JobDAO extends DAO {
 		if (searchBean.getEmployment() != null && !searchBean.getEmployment().isEmpty()) {
 			sql += "AND employment=? ";
 		}
-		try (Connection connection = getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql)) {
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql)) {
 			int i = 1;
 			if (searchBean.getCompany() != null && !searchBean.getCompany().isEmpty()) {
 				pstmt.setString(i++, "%" + searchBean.getCompany() + "%");

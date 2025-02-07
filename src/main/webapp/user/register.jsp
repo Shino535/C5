@@ -3,8 +3,14 @@
 
 <c:choose>
 	<c:when test="${result}">
-		<p>登録が成功しました。</p>
-		<p>ようこそ:<c:out value="${user.name}"/>さん</p>
+		<div class="register-success">
+			<div class="register-success-title">
+				登録が成功しました
+			</div>
+			<div class="register-success-message">
+				ようこそ:<c:out value="${user.name}"/>さん
+			</div>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<div class="register-container">

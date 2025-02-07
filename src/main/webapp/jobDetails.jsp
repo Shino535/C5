@@ -8,7 +8,7 @@
 			<div class="jobdetail-info">
 				<div class="jobdetail-company">${job.company}</div>
 				<div class="jobdetail-row2">
-					<div class="jobdetail-subtitle">勤務地</div>
+					<div class="jobdetail-infotitle">勤務地</div>
 					<div class="jobdetail-address">
 						<span class="material-symbols-rounded icon">
 						map
@@ -17,7 +17,7 @@
 					</div>
 				</div>
 				<div class="jobdetail-row4">
-					<div class="jobdetail-subtitle">職種</div>
+					<div class="jobdetail-infotitle">職種</div>
 					<div class="jobdetail-jobtype">
 						<span class="material-symbols-rounded icon">
 						person
@@ -27,7 +27,7 @@
 				</div>
 				<div class="jobdetail-row">
 					<div class="jobdetail-row3">
-						<div class="jobdetail-subtitle">雇用形態</div>
+						<div class="jobdetail-infotitle">雇用形態</div>
 						<div class="jobdetail-employment">
 							<span class="material-symbols-rounded icon">
 							work
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div class="jobdetail-row5">
-					<div class="jobdetail-subtitle">月給</div>
+					<div class="jobdetail-infotitle">月給</div>
 						<div class="jobdetail-benefit">
 							<span class="material-symbols-rounded icon">
 							universal_currency
@@ -45,7 +45,7 @@
 						</div>
 					</div>
 					<div class="jobdetail-row6">
-						<div class="jobdetail-subtitle">年間休日</div>
+						<div class="jobdetail-infotitle">年間休日</div>
 						<div class="jobdetail-holiday">
 							<span class="material-symbols-rounded icon">
 							calendar_month
@@ -60,13 +60,20 @@
 			</div>
 			<c:if test="${sessionScope.user.role=='user'}">
 				<div class="jobdetail-experience-add">
+					<div class="jobdetail-subtitle">
+						体験談コメント
+					</div>
 					<form action="/C5/user/JobExperienceRegister.action" method="post">
-						<input type="hidden" name="job_code" value="${param.code}">
-						<input type="hidden" name="user_code" value="${sessionScope.user.code}">
-		 				
-						就活体験談内容<br>
-						<input type="text" name="comment" value="${code}">
-						<input type="submit" value="登録">
+						<div class="jobdetail-experience-form">
+							<input type="hidden" name="job_code" value="${param.code}">
+							<input type="hidden" name="user_code" value="${sessionScope.user.code}">
+							<textarea name="comment" value="" placeholder="ありがとうございました" class="jobdetail-experience-input"></textarea>
+							<button type="submit" class="button jobdetail-experience-button">
+								<span class="material-symbols-rounded icon">
+								add_circle
+								</span>
+							</button>
+						</div>
 					</form>
 					<c:if test="${not empty error}">
 						${error}
@@ -79,13 +86,22 @@
 					<c:when test="${not empty jobExperience}">
 						<c:forEach var="experience" items="${jobExperience}">
 							<div class="jobdetail-experience-row">
-								ユーザーネーム: ${experience.user_name}<br>
-								コメント: <c:out value="${experience.comment}"/> | 投稿日: ${experience.date}
+								<div class="jobdetail-experience-column">
+									<div class="jobdetail-experience-name">
+										<c:out value="${experience.user_name}"/> さん
+									</div>
+									<div class="jobdetail-experience-date">
+										<c:out value="投稿日 ${experience.date}"/>
+									</div>
+								</div>
+								<div class="jobdetail-experience-comment">
+									<c:out value="${experience.comment}"/>
+								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<div class="jobdetail-text">
+						<div class="jobdetail-subtitle">
 							体験談はまだ投稿されていません。
 						</div>
 					</c:otherwise>

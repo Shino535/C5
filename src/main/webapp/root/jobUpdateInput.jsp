@@ -3,28 +3,20 @@
 
 <%@include file="/header_footer/header.jsp"%>
 
-
-<h3>更新対象求人</h3>
-
-<p>会社名：${jobBean.company}></p>
-<p>所在地：${jobBean.address}></p>
-
-<h3>更新内容入力</h3>
-
-<c:if test="${not empty error}">
-   ${error}
-</c:if>
-
-<form action="JobUpdate.action" method="post"
-	enctype="multipart/form-data">
-
-	<input type="hidden" name="code" value="${jobBean.code}" />
-
-	<p>
+<div class="jobupdate-container">
+	<h3>更新対象求人</h3>
+	<p>会社名：${jobBean.company}</p>
+	<p>所在地：${jobBean.address}</p>
+	
+	<h3>更新内容入力</h3>
+	<c:if test="${not empty error}">
+	   ${error}
+	</c:if>
+	<form action="JobUpdate.action" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="code" value="${jobBean.code}"/>
 		会社名<input type="text" name="company" value="${jobBean.company}">
-	</p>
-	<p>
-		所在地<select name="prefecture">
+		所在地
+		<select name="prefecture">
 			<option value="">選択してください</option>
 			<option value="北海道" ${jobBean.prefecture == '北海道' ? 'selected' : ''}>北海道</option>
 			<option value="青森県" ${jobBean.prefecture == '青森県' ? 'selected' : ''}>青森県</option>
@@ -74,20 +66,12 @@
 			<option value="鹿児島県" ${jobBean.prefecture == '鹿児島県' ? 'selected' : ''}>鹿児島県</option>
 			<option value="沖縄県" ${jobBean.prefecture == '沖縄県' ? 'selected' : ''}>沖縄県</option>
 		</select>
-
 		<input type="text" name="address" value="${jobBean.address}">
-	</p>
-	<p>
 		職種<input type="text" name="job_type" value="${jobBean.job_type}">
-	</p>
-	<p>
 		月収<input type="text" name="benefit" value="${jobBean.benefit}">円
-	</p>
-	<p>
-		年間休日<input type="text" name="holiday" value="${jobBean.holiday}">日
-	</p>
-	<p>
-		雇用形態<select name="employment">
+		年間休日<input type="text" name="holiday" value="${jobBean.holiday}">
+		雇用形態
+		<select name="employment">
 			<option value="">選択してください</option>
 			<option value="正社員" ${jobBean.employment == '正社員' ? 'selected' : ''}>正社員</option>
 			<option value="派遣社員" ${jobBean.employment == '派遣社員' ? 'selected' : ''}>派遣社員</option>
@@ -95,12 +79,9 @@
 			<option value="AP" ${jobBean.employment == 'アルバイト' ? 'selected' : ''}>アルバイト・パート</option>
 			<option value="業務委託" ${jobBean.employment == '業務委託' ? 'selected' : ''}>業務委託</option>
 		</select>
-	</p>
-	<p>求人票PDF<input type="file" name="pdf"></p>
-	<p>
+		求人票PDF<input type="file" name="pdf">
 		<input type="submit" value="更新">
-	</p>
-
-</form>
+	</form>
+</div>
 
 <%@include file="/header_footer/footer.jsp"%>

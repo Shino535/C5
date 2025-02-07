@@ -20,6 +20,10 @@
 	src: url("/C5/font/Koruri-Bold.ttf");
 }
 @font-face{
+	font-family: "koruri-regular";
+	src: url("/C5/font/Koruri-Regular.ttf");
+}
+@font-face{
 	font-family: "boku-bold";
 	src: url("/C5/font/Boku2-Bold.ttf");
 }
@@ -44,7 +48,8 @@
 	--font-corp-b: "corp-bold";
 	--font-corp-m: "corp-medium";
 	--font-kakumei: "nikkyou-sans";
-	--font-koruri: "koruri-bold";
+	--font-koruri-b: "koruri-bold";
+	--font-koruri-r: "koruri-regular";
 	--font-boku: "boku-bold";
 }
 label{
@@ -108,7 +113,6 @@ input[type="password"]:focus{
 	height: 40px;
 	border-radius: 15px;
 	padding: .5rem;
-	text-align: center;
 	border: none;
 	cursor: pointer;
 	text-decoration: none;
@@ -116,6 +120,10 @@ input[type="password"]:focus{
 	color: var(--main-white);
 	font-weight: bold;
 	font-size: 15px;
+	display: inline-flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
 }
 .button-sbmt{
 	border: none;
@@ -131,6 +139,12 @@ input[type="password"]:focus{
 .button-sbmt.active{
 	background-color: var(--accent-color);
 	cursor: pointer;
+}
+.button{
+	all: unset;
+	cursor: pointer;
+	display: inline-flex;	
+	align-items: center;
 }
 /*====================ボタン====================*/
 /*===============================共通===============================*/
@@ -292,11 +306,10 @@ main{
 	flex-direction: column;
 }
 .search-subtitle{
-	display: inline-block;
+	display: inline-flex;
 	width: 80px;
 	text-align: start;
-	letter-spacing: 1px;
-	font-family: var(--font-koruri);
+	font-family: var(--font-koruri-b);
 }
 .column{
 	display: flex;
@@ -363,14 +376,6 @@ main{
 }
 /*====================ログアウト↑====================*/
 /*====================検索結果↓====================*/
-.jobsearch-form{
-	background-color: var(--main-white);
-	border-radius: 15px;
-	padding: .5rem;
-	padding-bottom: 3rem;
-	box-shadow: var(--material-shadow);
-	margin-top: 2rem;
-}
 .jobsearch-container{
 	display: flex;
 	flex-direction: column;
@@ -380,6 +385,17 @@ main{
 	max-width: 700px;
 	min-width: 620px;
 	gap: 1rem;
+}
+.jobsearch-form{
+	background-color: var(--main-white);
+	border-radius: 15px;
+	padding: .5rem;
+	padding-bottom: 3rem;
+	box-shadow: var(--material-shadow);
+	min-width: 620px;
+	width: 620px;
+	margin: auto;
+	margin-top: 2rem;
 }
 .jobsearch-title{
 	font-family: var(--font-corp-m);
@@ -399,7 +415,7 @@ main{
 	padding-bottom: .5rem;
 	border-bottom: 1px solid var(--main-black);
 }
-.jobsearch-company{
+.jobsearch-jobtype{
 	color: var(--main-black);
 	font-size: 13px;
 }
@@ -438,6 +454,7 @@ main{
 	width: 80%;
 	max-width: 800px;
 	gap: 1rem;
+	margin-bottom: 1rem;
 }
 .jobdetail-info{
 	display: flex;
@@ -447,7 +464,7 @@ main{
 	gap: .5rem;
 	width: 500px;
 }
-.jobdetail-subtitle{
+.jobdetail-infotitle{
 	font-family: var(--font-boku);
 	font-weight: 600;
 	letter-spacing: 5px;
@@ -488,8 +505,73 @@ main{
 	margin: auto;
 	width: 250px;
 }
-/*====================求人詳細↑====================*/
-/*====================会員登録↓====================*/
+.jobdetail-subtitle{
+	font-family: var(--font-corp-m);
+	font-size: 20px;
+	font-weight: 500;
+}
+/*===========体験談登録===========*/
+.jobdetail-experience-add{
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+}
+.jobdetail-experience-form{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+.jobdetail-experience-input{
+	padding: .5rem;
+	border-radius: 10px;
+	height: 100px;
+	min-width: 400px;
+	max-width: 400px;
+}
+.jobdetail-experience-button{
+	margin: auto;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: .5rem;
+}
+/*===========体験談登録===========*/
+/*===========体験談リスト===========*/
+.jobdetail-experience{
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	width: 600px;
+	min-width: 550px;
+	margin: auto;
+}
+.jobdetail-experience-row{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--main-gray);
+	padding: .5rem;
+	border-radius: 5px;
+	height: 120px;
+}
+.jobdetail-experience-column{
+	display: flex;
+	justify-content: space-between;
+}
+.jobdetail-experience-name{
+	font-family: var(--font-koruri-b);
+}
+.jobdetail-experience-date{
+	font-size: 13px;
+	color: var(--text-gray);
+}
+.jobdetail-experience-comment{
+	font-family: var(--font-koruri-r);
+	font-size: 14px;
+}
+/*===========体験談リスト===========*/
+/*====================求人詳細====================*/
+/*====================会員登録====================*/
 .register-container{
 	display: flex;
 	flex-direction: column;
@@ -535,8 +617,23 @@ main{
 	bottom: 3px;
 	user-select: none;
 }
-/*====================会員登録↑====================*/
-/*====================ログイン↓====================*/
+/*===========登録成功===========*/
+.register-success{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 2rem;
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: var(--material-shadow);
+	gap: .5rem;
+}
+.register-success-title{
+	font-family: var(--font-koruri-b);
+}
+/*===========登録成功===========*/
+/*====================会員登録====================*/
+/*====================ログイン====================*/
 .login-container{
 	display: flex;
 	flex-direction: column;
@@ -723,6 +820,28 @@ main{
 .jobadd-submit{
 	margin: auto;
 }
+/*===========登録成功===========*/
+.jobadd-success{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	padding: 1rem;
+	gap: .5rem;
+	border-radius: 10px;
+	box-shadow: var(--material-shadow);
+	margin-top: 2rem;
+}
+.jobadd-success-message{
+	font-family: var(--font-koruri-b);
+}
+.jobadd-success-row{
+	text-align: start;
+	width: 500px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/*===========登録成功===========*/
 /*====================求人登録====================*/
 /*====================求人情報管理====================*/
 .joblist-container{
@@ -733,21 +852,89 @@ main{
 	align-items: center;
 	width: 80%;
 	max-width: 700px;
+	gap: 1rem;
 }
 .joblist-title{
 	font-family: var(--font-corp-b);
 	font-size: 25px;
 	margin-top: 2rem;
 }
+.joblist-search{
+	display: flex;
+}
 .joblist-search input[type="text"]{
 	width: 200px !important;
 	height: 34px !important;
+	border-radius: 15px 0 0 15px;
 }
 .joblist-button{
 	width: 150px !important;
 	height: 34px !important;
+	border-radius: 0 15px 15px 0;
+}
+.joblist-row{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: .5rem;
+	border-radius: 5px;
+	border: 1px solid var(--main-gray);
+	width: 700px;
+}
+.joblist-row-text{
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+}
+.joblist-column{
+	width: 650px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: start;
+}
+.joblist-row-icon{
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	margin: 10px;
+}
+.joblist-row-icon form{
+	height: 24px;
 }
 /*====================求人情報管理====================*/
+/*====================求人情報更新====================*/
+.jobupdate-container{
+	display: flex;
+	flex-direction: column;
+	width: 700px;
+}
+/*====================求人情報更新====================*/
+/*====================利用者アカウント退会====================*/
+.userwithdraw-container{
+	display: flex;
+	flex-direction: column;
+	max-width: 300px;
+	min-width: 300px;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	margin-top: 2rem;
+	gap: 1rem;
+	padding: 1rem;
+	background-color: var(--main-white);
+	box-shadow: var(--material-shadow);
+	border-radius: 10px;
+}
+.userwithdraw-title{
+	font-family: var(--font-corp-m);
+	font-size: 20px;
+}
+.userwithdraw-error{
+	color: red;
+	font-family: var(--font-corp-m);
+}
+/*====================利用者アカウント退会====================*/
 /*===============================メイン===============================*/
 
 /*===============================フッター===============================*/

@@ -1,6 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/header_footer/header.jsp"%>
 
 <div class="joblist-container">
@@ -13,15 +11,32 @@
 	</form>
 	<c:forEach var="p" items="${list}">
 		<div class="joblist-row">
-			会社名：${p.company}&nbsp;&nbsp;所在地：${p.address}
-			<form action="UpdateInput.action" method="post">
-				<input type="hidden" name="code" value="${p.code}"/>
-				<input type="submit" value="更新">
-			</form>
-			<form action="JobDeleteSelect.action" method="post">
-				<input type="hidden" name="code" value="${p.code}"/>
-				<input type="submit" value="削除">
-			</form>
+			<div class="joblist-row-text">
+				<div class="joblist-column">
+					会社名 <c:out value="${p.company}"/>
+				</div>
+				<div class="joblist-column">
+					所在地 <c:out value="${p.address}"/>
+				</div>
+			</div>
+			<div class="joblist-row-icon">
+				<form action="UpdateInput.action" method="post">
+					<input type="hidden" name="code" value="${p.code}"/>
+					<button type="submit" class="button">
+						<span class="material-symbols-rounded icon">
+						cached
+						</span>
+					</button>
+				</form>
+				<form action="JobDeleteSelect.action" method="post">
+					<input type="hidden" name="code" value="${p.code}"/>
+					<button type="submit" class="button">
+						<span class="material-symbols-rounded icon">
+						delete
+						</span>
+					</button>
+				</form>
+			</div>
 		</div>
 	</c:forEach>
 </div>

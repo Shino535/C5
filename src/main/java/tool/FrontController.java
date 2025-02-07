@@ -26,8 +26,16 @@ public class FrontController extends HttpServlet {
 			String url=action.execute(request, response);
 			request.getRequestDispatcher(url).forward(request, response);
 		}catch(SQLException|NamingException e) {
+//			String referer=request.getHeader("Referer");
 			System.err.printf("%s%n",e);
 			HttpSession session=request.getSession();
+			
+			// referer(どこから来たかのURL)をもとに遷移先を分ける処理
+//			if(referer.contains("/ExperienceList")) {
+//				session.setAttribute("dbConError","データベースエラー");
+//				response.sendRedirect("/");
+//			}
+			
 			session.setAttribute("dbConError","データベースエラー");
 			response.sendRedirect("/C5");
 		}catch (NullPointerException e) {
