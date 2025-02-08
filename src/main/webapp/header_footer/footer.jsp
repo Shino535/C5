@@ -17,5 +17,6 @@
 		<script src="/C5/js/login.js"></script>
 		<script src="/C5/js/text-width.js"></script>
 		<script src="/C5/js/jobadd.js"></script>
+		<script src="/C5/js/icon_backup.js"></script>
 	</body>
 </html>

@@ -199,6 +199,8 @@ header a:visited{
 	white-space: nowrap;
 	font-family: var(--font-koruri-b);
 	font-size: 10px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 .nav-icon:hover .icon-text {
 	display: block;
@@ -403,7 +405,6 @@ main{
 	background-color: var(--main-white);
 	border-radius: 15px;
 	padding: .5rem;
-	padding-bottom: 3rem;
 	box-shadow: var(--material-shadow);
 	min-width: 620px;
 	width: 620px;
@@ -565,7 +566,7 @@ main{
 	border: 1px solid var(--main-gray);
 	padding: .5rem;
 	border-radius: 5px;
-	height: 120px;
+	height: auto;
 }
 .jobdetail-experience-column{
 	display: flex;
@@ -742,6 +743,12 @@ main{
 	font-family: var(--font-corp-b);
 	font-size: 15px;
 }
+/*===========体験談削除確認===========*/
+.experiencedelete-confirm{
+	display: flex;
+	flex-direction: column;
+}
+/*===========体験談削除確認===========*/
 /*====================就活体験談削除====================*/
 /*====================求人登録====================*/
 .jobadd-container{

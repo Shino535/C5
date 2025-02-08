@@ -1,15 +1,14 @@
 package user;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
 
-import bean.JobBean;
-import bean.JobExperienceBean;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import dao.JobDAO;
 import dao.JobExperienceDAO;
 import dao.UserDAO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import tool.Action;
 
 public class JobExperienceRegisterAction extends Action {
@@ -26,47 +25,41 @@ public class JobExperienceRegisterAction extends Action {
 		JobExperienceDAO experienceDAO = new JobExperienceDAO();
 		JobDAO jobDAO = new JobDAO();
 		UserDAO userDAO = new UserDAO();
-		JobBean job = jobDAO.getJob(job_code);
 		
 		String user_name = userDAO.getName(user_code);
 		String job_name = jobDAO.getName(job_code);
 		
-		List<JobExperienceBean> experienceList = experienceDAO.getExperience(job_code);
-		
 		if(comment.isBlank()) {
-			setError(request, "コメントは必ず入力してください", comment, job, experienceList);
-			request.setAttribute("job_name", job_name);
+			setError(request, "コメントは必ず入力してください");
 			response.sendRedirect("/C5/Job.action?code=" + job_code);
 			return null;
 		}
 		if(comment.length() > 255) {
-			setError(request, "コメントは255文字以内で入力してください", comment, job, experienceList);
-			request.setAttribute("job_name", job_name);
+			setError(request, "コメントは255文字以内で入力してください");
 			response.sendRedirect("/C5/Job.action?code=" + job_code);
 			return null;
 		}else {
 			try {
 				experienceDAO.add(comment, user_code, job_code, user_name, job_name);
-				experienceList = experienceDAO.getExperience(job_code);
-				setError(request, "体験談投稿に成功", comment, job, experienceList);
-				request.setAttribute("job_name", job_name);
+				setSuccess(request, "体験談投稿に成功");
 				response.sendRedirect("/C5/Job.action?code=" + job_code);
 				return null;
 			}catch (SQLIntegrityConstraintViolationException e) {
 				String error = e.getMessage();
 				if(error.contains("FOREIGN KEY")) {
-					setError(request, "体験談投稿エラー", comment, job, experienceList);
+					setError(request, "体験談投稿に失敗しました");
 				}
 				response.sendRedirect("/C5/Job.action?code=" + job_code);
-				return "/jobDetails.jsp";
+				return null;
 			}
 		}
-		
 	}
-	private void setError(HttpServletRequest request, String error, String comment, JobBean job, List<JobExperienceBean> experienceList) {
-		request.setAttribute("error", error);
-		request.setAttribute("comment", comment);
-		request.setAttribute("job", job);
-		request.setAttribute("jobExperience", experienceList);
+	private void setError(HttpServletRequest request,String errorMsg) {
+		HttpSession session=request.getSession();
+		session.setAttribute("error", errorMsg);
+	}
+	private void setSuccess(HttpServletRequest request,String successMsg) {
+		HttpSession session=request.getSession();
+		session.setAttribute("success", successMsg);
 	}
 }
