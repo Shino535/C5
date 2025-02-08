@@ -7,7 +7,10 @@
 	<p>以下の体験談を削除しますか？</p>
 	
 	<c:forEach var="code" items="${deleteCode}">
-		<sql 
+		<sql:query var="experience" datasource="${dataSource}">
+			SELECT job_name,user_name,comment,date FROM jobexperience WHERE code=${code};
+		</sql:query>
+		<div class="experiencedelete-"></div>
 	</c:forEach>
 	
 	<form action="ExperienceDelete.action" method="post">

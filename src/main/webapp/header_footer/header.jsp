@@ -15,7 +15,7 @@
 	-->
 	</head>
 	<body>
-		
+		<sql:setDataSource var="dataSource" dataSource="jdbc/c5_db"/>
 		<header>
 			<!-- トップページ -->
 			<a href="/C5" class="title">
