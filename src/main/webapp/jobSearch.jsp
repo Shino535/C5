@@ -161,7 +161,7 @@
 					</a>
 				</c:when>
 				<c:otherwise>
-					<span class="material-symbols-rounded disabled">keyboard_arrow_left</span>
+					<span class="material-symbols-rounded disabled　arr">keyboard_arrow_left</span>
 				</c:otherwise>
 			</c:choose>
 			
