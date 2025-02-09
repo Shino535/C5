@@ -10,7 +10,7 @@
 		<sql:query var="experience" datasource="${dataSource}">
 			SELECT job_name,user_name,comment,date FROM jobexperience WHERE code=${code};
 		</sql:query>
-		<div class="experiencedelete-"></div>
+		<div class="experiencedelete- "></div>
 	</c:forEach>
 	
 	<form action="ExperienceDelete.action" method="post">
