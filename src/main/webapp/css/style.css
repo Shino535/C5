@@ -724,12 +724,18 @@ main{
 .experience-info{
 	display: flex;
 	flex-direction: column;
+	white-space: normal;
+	width: 100%;
 }
 .experience-company{
 	font-weight: bold;
 }
 .experience-name{
 	font-size: small;
+}
+.experience-comment{
+	width: 100%;
+	white-space: normal;
 }
 .experience-delete {
 	margin: 1rem auto;
@@ -747,6 +753,16 @@ main{
 .experiencedelete-confirm{
 	display: flex;
 	flex-direction: column;
+	text-align: center;
+	width: 80%;
+	max-width: 700px;
+}
+.experiencedelete-row{
+	display: flex;
+	flex-direction: column;
+	text-align: start;
+	border: 1px solid #ccc;
+	border-radius: 15px;
 }
 /*===========体験談削除確認===========*/
 /*====================就活体験談削除====================*/

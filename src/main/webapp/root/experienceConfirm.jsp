@@ -6,18 +6,34 @@
 	<h2>削除確認</h2>
 	<p>以下の体験談を削除しますか？</p>
 	
-	<c:forEach var="code" items="${deleteCode}">
-		<sql:query var="experience" datasource="${dataSource}">
-			SELECT job_name,user_name,comment,date FROM jobexperience WHERE code=${code};
-		</sql:query>
-		<div class="experiencedelete- "></div>
-	</c:forEach>
+	<c:if test="${not empty deleteCode}">
+		<c:forEach var="code" items="${deleteCode}">
+			<sql:query var="experience" dataSource="${dataSource}">
+				SELECT job_name,user_name,comment,date FROM jobexperience WHERE code=?;
+				<sql:param value="${code}"/>
+			</sql:query>
+			<div class="experiencedelete-row">
+				<div class="experience-row1">
+					<span class="experience-company">
+						<c:out value="${experience.rows[0].job_name}"/>
+					</span>
+					${experience.rows[0].date}
+					<span class="experience-name">
+						<c:out value="${experience.rows[0].user_name}"/>
+					</span>
+				</div>
+				<span class="experience-comment">
+					<c:out value="${experience.rows[0].comment}"/>
+				</span>
+			</div>
+		</c:forEach>
+	</c:if>
 	
 	<form action="ExperienceDelete.action" method="post">
 		<c:forEach var="code" items="${deleteCode}">
 			<input type="hidden" name="code" value="${code}">
 		</c:forEach>
-	 	<input type="submit" value="削除">
+	 	<input type="submit" value="削除" class="button-sbmt active">
 	</form>
 </div>
 

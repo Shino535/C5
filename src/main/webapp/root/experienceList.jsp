@@ -23,7 +23,7 @@
 							${experience.date}
 							<span class="experience-name">投稿者:${experience.user_name}</span>
 						</div>
-						<span class="experience-comment">コメント:${experience.comment}</span>
+						<div class="experience-comment">コメント:${experience.comment}</div>
 					</div>
 				</div>
 			</label>

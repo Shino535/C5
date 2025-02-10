@@ -85,7 +85,6 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-						<a href="/C5/root/Login.action" class="nav-button">管理者ログイン</a>
 						<div class="nav-icon">
 							<a href="/C5/user/Login.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
