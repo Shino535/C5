@@ -17,6 +17,20 @@
 	<body>
 		<sql:setDataSource var="dataSource" dataSource="jdbc/c5_db"/>
 		<header>
+			<div class="header-name">
+				<c:choose>
+					<c:when test="${sessionScope.root.role=='root'}">
+						<c:out value="管理者：${sessionScope.root.name}さん"/>
+					</c:when>
+					<c:when test="${sessionScope.user.role=='user'}">
+						<c:out value="利用者：${sessionScope.user.name}さん"/>
+					</c:when>
+					<c:otherwise>
+						ゲスト
+					</c:otherwise>
+				</c:choose>
+			</div>
+			
 			<!-- トップページ -->
 			<a href="/C5" class="title">
 				<img src="/C5/img/hand-black.png" class="title-logo">
@@ -131,7 +145,6 @@
 						<div class="name">
 							<c:out value="${sessionScope.user.name}"/>
 						</div>
-						<a href="/C5/user/UserUpdate.action" class="button-s">アカウント情報更新</a>
 						<a href="/C5/Logout.action" class="button-s">ログアウト</a>
 					</c:when>
 					<c:otherwise>

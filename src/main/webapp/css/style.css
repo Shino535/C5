@@ -197,6 +197,12 @@ header a{
 header a:visited{
 	text-decoration: none;
 }
+.header-name{
+	position: absolute;
+	left: 2rem;
+	font-family: var(--font-corp-m);
+	user-select: none;
+}
 /*====================ナビバー====================*/
 #nav-user{
 	background-color: transparent;
