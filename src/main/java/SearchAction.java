@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.JobBean;
@@ -31,6 +32,9 @@ public class SearchAction extends Action{
 		int totalPage=(int)Math.ceil((double)jobDAO.count(search)/20);
 		int thisPage=Integer.parseInt(request.getParameter("page"));
 		List<JobBean> joblist=jobDAO.search(search,thisPage);
+		if(joblist==null) {
+			joblist=new ArrayList<JobBean>();
+		}
 		
 		System.out.printf("現在のページ:%d%n全ページ数:%d%n",thisPage,totalPage);
 		

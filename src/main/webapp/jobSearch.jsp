@@ -118,7 +118,7 @@
 	</c:if>
 	<!-- ★ ここまで -->
 
-	<c:if test="${totalPage<=0}">
+	<c:if test="${empty joblist}">
 		<div class="jobsearch-none">検索結果0件</div>
 	</c:if>
 	<div class="jobsearch-list">
