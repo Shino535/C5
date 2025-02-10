@@ -6,14 +6,14 @@
 	<c:choose>
 		<c:when test="${job != null}">
 			<div class="jobdetail-info">
-				<div class="jobdetail-company">${job.company}</div>
+				<div class="jobdetail-company"><c:out value="${job.company}"/></div>
 				<div class="jobdetail-row2">
 					<div class="jobdetail-infotitle">勤務地</div>
 					<div class="jobdetail-address">
 						<span class="material-symbols-rounded icon">
 						map
 						</span>
-						${job.prefecture}${job.address}
+						<c:out value="${job.prefecture}${job.address}"/>
 					</div>
 				</div>
 				<div class="jobdetail-row4">
@@ -22,7 +22,7 @@
 						<span class="material-symbols-rounded icon">
 						person
 						</span>
-						${job.job_type}
+						<c:out value="${job.job_type}"/>
 					</div>
 				</div>
 				<div class="jobdetail-row">
@@ -32,7 +32,7 @@
 							<span class="material-symbols-rounded icon">
 							work
 							</span>
-							${job.employment}
+							<c:out value="${job.employment}"/>
 						</div>
 					</div>
 					<div class="jobdetail-row5">
@@ -41,7 +41,7 @@
 							<span class="material-symbols-rounded icon">
 							universal_currency
 							</span>
-							${job.benefit}円
+							<c:out value="${job.benefit}円"/>
 						</div>
 					</div>
 					<div class="jobdetail-row6">
@@ -50,7 +50,7 @@
 							<span class="material-symbols-rounded icon">
 							calendar_month
 							</span>
-							${job.holiday}日
+							<c:out value="${job.holiday}日"/>
 						</div>
 					</div>
 				</div>

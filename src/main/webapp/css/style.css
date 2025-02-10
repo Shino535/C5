@@ -89,6 +89,16 @@ input[type="password"]:focus{
 	user-select: none;
 	display: block;
 }
+.success-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: 1rem;
+	border-radius: 10px;
+	margin-top: 2rem;
+	box-shadow: var(--material-shadow);
+}
 /*====================全部====================*/
 /*====================ボタン====================*/
 .button-icon{
@@ -111,6 +121,23 @@ input[type="password"]:focus{
 }
 .button-s{
 	width: 120px;
+	height: 40px;
+	border-radius: 15px;
+	padding: .5rem;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	background-color: var(--accent-color);
+	color: var(--main-white);
+	font-weight: bold;
+	font-size: 15px;
+	display: inline-flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+}
+.button-fit{
+	width: auto;
 	height: 40px;
 	border-radius: 15px;
 	padding: .5rem;
@@ -715,6 +742,7 @@ main{
 	text-align: start;
 	border: 1px solid #ccc;
 	border-radius: 15px;
+	padding: .5rem;
 }
 .experience-check{
 	display: flex;
@@ -756,6 +784,16 @@ main{
 	text-align: center;
 	width: 80%;
 	max-width: 700px;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+.experiencedelete-confirm>h2{
+	margin: 0;
+	margin-top: 1rem;
+}
+.experiencedelete-subtitle{
+	font-weight: bold;
+	color: red;
 }
 .experiencedelete-row{
 	display: flex;
@@ -763,6 +801,14 @@ main{
 	text-align: start;
 	border: 1px solid #ccc;
 	border-radius: 15px;
+}
+.ex-del-button input[type="submit"]{
+	background-color: red;
+}
+.ex-del-button{
+	display: flex;
+	gap: 3rem;
+	margin: auto;
 }
 /*===========体験談削除確認===========*/
 /*====================就活体験談削除====================*/
@@ -824,6 +870,7 @@ main{
 }
 .jobadd-row select{
 	width: 150px;
+	padding: 0 0 0 1rem;
 }
 .jobadd-company,
 .jobadd-jobtype{
@@ -852,6 +899,9 @@ main{
 	border-radius: 15px;
 	border: 1px solid var(--main-gray);
 	height: 32px;
+}
+.jobadd-inline select{
+	padding: 0 0 0 1rem;
 }
 .jobadd-submit{
 	margin: auto;
@@ -994,6 +1044,48 @@ main{
 	margin: 0;
 }
 /*====================求人情報削除====================*/
+/*====================利用者BAN====================*/
+.userdel-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.userdel-list{
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+}
+.userdel-row{
+	display: flex;
+	text-align: start;
+	padding: .5rem;
+	width: 320px;
+	max-width: 320px;
+	border-radius: 5px;
+	border: 1px solid var(--main-gray);
+}
+.userdel-row label{
+	display: flex;
+}
+.userdel-name{
+	max-width: 280px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.userdel-container h2{
+	margin: 0;
+}
+.userdel-list button[type="submit"]{
+	margin: auto;
+}
+.userdel-con{
+	gap: 1rem;
+}
+/*====================利用者BAN====================*/
 /*====================利用者アカウント退会====================*/
 .userwithdraw-container{
 	display: flex;

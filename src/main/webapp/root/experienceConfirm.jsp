@@ -4,7 +4,9 @@
 
 <div class="experiencedelete-confirm">
 	<h2>削除確認</h2>
-	<p>以下の体験談を削除しますか？</p>
+	<div class="experiencedelete-subtitle">
+		以下の体験談を削除しますか？
+	</div>
 	
 	<c:if test="${not empty deleteCode}">
 		<c:forEach var="code" items="${deleteCode}">
@@ -29,12 +31,15 @@
 		</c:forEach>
 	</c:if>
 	
-	<form action="ExperienceDelete.action" method="post">
-		<c:forEach var="code" items="${deleteCode}">
-			<input type="hidden" name="code" value="${code}">
-		</c:forEach>
-	 	<input type="submit" value="削除" class="button-sbmt active">
-	</form>
+	<div class="ex-del-button">
+		<form action="ExperienceDelete.action" method="post">
+			<c:forEach var="code" items="${deleteCode}">
+				<input type="hidden" name="code" value="${code}">
+			</c:forEach>
+		 	<input type="submit" value="削除" class="button-sbmt active">
+		</form>
+		<button onclick="history.back()" class="button-s">戻る</button>
+	</div>
 </div>
 
 <%@ include file="/header_footer/footer.jsp"%>

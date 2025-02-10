@@ -110,13 +110,13 @@
 	<div class="jobsearch-title">求人検索結果</div>
 	
 	<!-- ★ 削除済みの求人をクリックした場合のエラーメッセージ -->
-<c:if test="${not empty sessionScope.jobNotFound}">
-    <div class="error-message" style="color: red; font-weight: bold; margin-bottom: 10px;">
-        ${sessionScope.jobNotFound}
-    </div>
-    <c:remove var="jobNotFound" scope="session"/>
-</c:if>
-<!-- ★ ここまで -->
+	<c:if test="${not empty sessionScope.jobNotFound}">
+		<div class="error-message" style="color: red; font-weight: bold; margin-bottom: 10px;">
+			<c:out value="${sessionScope.jobNotFound}"/>
+		</div>
+		<c:remove var="jobNotFound" scope="session"/>
+	</c:if>
+	<!-- ★ ここまで -->
 
 	<c:if test="${totalPage<=0}">
 		<div class="jobsearch-none">検索結果0件</div>
@@ -141,7 +141,7 @@
 						<span class="material-symbols-rounded icon jobsearch-icon">
 						calendar_month
 						</span>
-						年間休日${job.holiday}日
+						<c:out value="年間休日${job.holiday}日"/>
 					</div>
 				</div>
 				<a href="Job.action?code=${job.code}">詳細</a>

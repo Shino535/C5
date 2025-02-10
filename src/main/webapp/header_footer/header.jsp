@@ -37,25 +37,29 @@
 			<div class="nav-bar">
 				<c:choose>
 					<c:when test="${sessionScope.root.role=='root'}">
-					<div class="nav-icon">
-						<a href="/C5/root/ExperienceList.action" class="button-icon nav-button-icon">
-							<span class="material-symbols-rounded icon">
-							contract_delete
-							</span>
-						</a>
-						<div class="icon-text">体験談管理</div>
-					</div>
 						<div class="nav-icon">
-						<a href="/C5/root/JobRegister.action" class="button-icon nav-button-icon">
-						<span class="material-symbols-rounded icon">add_home_work</span>
-						</a>
-						<div class="icon-text">求人登録</div>
+							<a href="/C5/root/ExperienceList.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
+								contract_delete
+								</span>
+							</a>
+							<div class="icon-text">体験談管理</div>
 						</div>
 						<div class="nav-icon">
-						<a href="/C5/root/JobList.action" class="button-icon nav-button-icon">
-						<span class="material-symbols-rounded icon">edit_square</span>
-						</a>
-						<div class="icon-text">求人管理</div>
+							<a href="/C5/root/JobRegister.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
+								add_home_work
+								</span>
+							</a>
+							<div class="icon-text">求人登録</div>
+						</div>
+						<div class="nav-icon">
+							<a href="/C5/root/JobList.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
+								edit_square
+								</span>
+							</a>
+							<div class="icon-text">求人管理</div>
 						</div>
 						<div class="nav-icon">
 							<a href="/C5/Logout.action" class="button-icon nav-button-icon">

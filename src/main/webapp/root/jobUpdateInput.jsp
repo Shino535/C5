@@ -80,25 +80,13 @@
 				</div>
 				<div class="search-benefit">
 					<div class="search-subtitle">月収</div>
-					<select name="benefit">
-						<option value="">選択してください</option>
-						<option value="150000" ${jobBean.benefit=='150000'?'selected':''}>15万円以上</option>
-						<option value="200000" ${jobBean.benefit=='200000'?'selected':''}>20万円以上</option>
-						<option value="250000" ${jobBean.benefit=='250000'?'selected':''}>25万円以上</option>
-						<option value="300000" ${jobBean.benefit=='300000'?'selected':''}>30万円以上</option>
-					</select>
+					<input type="text" name="benefit" value="${jobBean.benefit}">
 				</div>
 			</div>
 			<div class="column4 column">
 				<div class="search-holiday">
 					<div class="search-subtitle">年間休日</div>
-					<select name="holiday">
-						<option value="">選択してください</option>
-						<option value="100" ${jobBean.holiday == '100' ? 'selected' : ''}>100日以上</option>
-						<option value="110" ${jobBean.holiday == '110' ? 'selected' : ''}>110日以上</option>
-						<option value="120" ${jobBean.holiday == '120' ? 'selected' : ''}>120日以上</option>
-						<option value="130" ${jobBean.holiday == '130' ? 'selected' : ''}>130日以上</option>
-					</select>
+					<input type="text" name="holiday" value="${jobBean.holiday}">
 				</div>
 				<div class="search-employment">
 					<div class="search-subtitle">雇用形態</div>
@@ -122,7 +110,6 @@
 			</div>
 		</div>
 	</form>
-
 </div>
 
 <%@include file="/header_footer/footer.jsp"%>

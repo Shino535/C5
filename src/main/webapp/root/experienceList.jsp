@@ -4,11 +4,11 @@
 
 <div class="experience-container">
 	<h2>体験談一覧</h2>
-	<h4>
-		<c:if test="${not empty error}">
-		    <c:out value="${error}"/>
-		</c:if>
-	</h4>
+	<c:if test="${not empty error}">
+		<h4>
+			<c:out value="${error}"/>
+		</h4>
+	</c:if>
 	
 	<form action="ExperienceConfirm.action" method="post" class="experience-list">
 		<c:forEach var="experience" items="${experienceList}">

@@ -3,7 +3,10 @@
 
 <c:choose>
 	<c:when test="${result}">
-		<p>管理者<c:out value="${name}"/> さんの登録が成功しました。</p>
+		<div class="success-container">
+			管理者:<c:out value="${name}"/> さんの登録が成功しました
+			<a href="/C5/" class="button-fit">トップページ</a>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<div class="register-container">
