@@ -26,18 +26,21 @@ public class RoleFilter implements Filter{
 		
 		HttpSession session=httpRequest.getSession(false);
 		String role=null;
+		String name=null;
 		if(session!=null) {
 			UserBean user=(UserBean)session.getAttribute("user");
 			RootBean root=(RootBean)session.getAttribute("root");
 			if(user!=null) {
 				role=user.getRole();
+				name=user.getName();
 			}else if(root!=null){
 				role=root.getRole();
+				name=root.getName();
 			}
 		}
 		
 		String uri=httpRequest.getRequestURI();
-		System.out.printf("フィルター通過 : URI[%s] 権限[%s]%n",uri,(role==null?"なし":role));
+		System.out.printf("フィルター通過 :名前[%s] 権限[%s] URI[%s] %n",(name==null?"ゲスト":name),(role==null?"なし":role),uri);
 		
 		List<String> allowedPaths = Arrays.asList(
 			"/C5/Search","/C5/Job","/C5/jobDetails","/C5/pdf",

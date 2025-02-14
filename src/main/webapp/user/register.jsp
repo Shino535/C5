@@ -31,7 +31,7 @@
 					<div class="register-pass register register-subtitle">
 						<div class="register-subtitle">PASS</div>
 						<input type="password" id="pass" name="pass" value="${pass}">
-						<span class="material-symbols-rounded toggle-password" onclick="togglePassword()">
+						<span class="material-symbols-rounded toggle-password icon" onclick="togglePassword()">
 						visibility
 						</span>
 					</div>

@@ -76,7 +76,12 @@
 						</div>
 					</form>
 					<c:if test="${not empty error}">
-						${error}
+						<div class="userwithdraw-error">${error}</div>
+						<c:remove var="error" scope="session"/>
+					</c:if>
+					<c:if test="${not empty success}">
+						<div class="ex-success">${success}</div>
+						<c:remove var="success" scope="session"/>
 					</c:if>
 				</div>
 			</c:if>

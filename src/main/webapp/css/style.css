@@ -60,6 +60,7 @@ body{
 	flex-direction: column;
 	min-height: 100vh;
 	margin: 0;
+	width: 100%;
 }
 textarea{
 	background-color: var(--main-white);
@@ -299,6 +300,37 @@ main{
 	justify-content: center;
 }
 /*====================トップページ====================*/
+.index-con{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+}
+.aad-con{
+	display: flex;
+	gap: 1rem;
+	margin: auto;
+	align-items: center;
+	justify-content: center;
+	height: 309px;
+	overflow: hidden;
+	width: 100%;
+}
+.aad-colum{
+	display: flex;
+	flex-direction: column;
+	width: auto;
+}
+.aad-img{
+	max-height: 250px;
+	height: auto;
+	width: auto;
+	box-shadow: var(--material-shadow);
+}
+.add-text{
+	font-family: var(--font-koruri-r);
+	font-size: 8px;
+}
 /*===========通知===========*/
 .notification {
 	position: fixed;
@@ -329,6 +361,8 @@ main{
 .search-container{
 	display: flex;
 	justify-content: center;
+	width: 100%;
+	overflow: hidden;
 }
 .search-title{
 	position: absolute;
@@ -340,7 +374,7 @@ main{
 }
 .search-img{
 	box-shadow: var(--material-shadow);
-	width: 100vw;
+	width: 100%;
 	height: 450px;
 	user-select: none;
 }
@@ -582,6 +616,10 @@ main{
 	bottom: 0;
 	right: 0;
 	padding: .5rem;
+}
+.ex-success{
+	color: var(--accent-color);
+	font-family: var(--font-corp-m);
 }
 /*===========体験談登録===========*/
 /*===========体験談リスト===========*/
@@ -1117,6 +1155,32 @@ main{
 	font-family: var(--font-corp-m);
 }
 /*====================利用者アカウント退会====================*/
+/*====================エラーページ====================*/
+.err-con>*{
+	user-select: none;
+}
+.err-con{
+	display: flex;
+	gap: 1rem;
+}
+.err-column{
+	display: flex;
+	flex-direction: column;
+	margin-top: 2rem;
+	gap: 1rem;
+}
+.err-title{
+	font-family: var(--font-corp-b);
+	font-size: 40px;
+}
+.err-message{
+	font-family: var(--font-corp-m);
+	font-size: 20px;
+}
+.err-img{
+	height: 250px;
+}
+/*====================エラーページ====================*/
 /*===============================メイン===============================*/
 
 /*===============================フッター===============================*/
