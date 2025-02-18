@@ -104,9 +104,9 @@
 					</c:when>
 					<c:when test="${sessionScope.user.role=='su'}">
 						<div class="nav-icon">
-							<a href="/C5/Logout.action" class="button-icon nav-button-icon">
+							<a href="/C5/su/Index.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
-								suoervised_user_icon
+								supervised_user_circle
 								</span>
 							</a>
 							<div class="icon-text">ポートフォリオ</div>
