@@ -106,6 +106,14 @@
 						<div class="nav-icon">
 							<a href="/C5/Logout.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
+								suoervised_user_icon
+								</span>
+							</a>
+							<div class="icon-text">ポートフォリオ</div>
+						</div>
+						<div class="nav-icon">
+							<a href="/C5/Logout.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
 								logout
 								</span>
 							</a>
