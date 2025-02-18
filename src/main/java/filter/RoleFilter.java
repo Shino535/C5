@@ -47,6 +47,12 @@ public class RoleFilter implements Filter{
 			"/C5/css","/C5/img","/C5/js","/C5/font"
 		);
 		
+		//suのみ
+		if("su".equals(role)) {
+			chain.doFilter(request,response);
+			return;
+		}
+		
 		//全アクター
 		if(allowedPaths.stream().anyMatch(uri::contains)||uri.endsWith("/C5/")) {
 			chain.doFilter(request,response);
