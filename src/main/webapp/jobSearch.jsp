@@ -124,11 +124,19 @@
 	<div class="jobsearch-list">
 		<c:forEach var="job" items="${joblist}">
 			<div class="jobsearch-row">
-				<div class="jobsearch-company jobsearch-text">${job.company}</div>
-				<div class="jobsearch-jobtype jobsearch-text">${job.job_type}</div>
+				<div class="jobsearch-company jobsearch-text">
+					<c:out value="${job.company}"/>
+				</div>
+				<div class="jobsearch-jobtype jobsearch-text">
+					<c:out value="${job.job_type}"/>
+				</div>
 				<div class="jobsearch-row3">
-					<div class="jobsearch-prefecture jobsearch-text">${job.prefecture}</div>
-					<div class="jobsearch-address jobsearch-text">${job.address}</div>
+					<div class="jobsearch-prefecture jobsearch-text">
+						<c:out value="${job.prefecture}"/>
+					</div>
+					<div class="jobsearch-address jobsearch-text">
+						<c:out value="${job.address}"/>
+					</div>
 				</div>
 				<div class="jobsearch-row4">
 					<div class="jobsearch-benefit jobsearch-text">
@@ -157,27 +165,29 @@
 					<a href="?company=${searchList.company}&prefecture=${searchList.prefecture}&address=${searchList.address}
 					&job_type=${searchList.jobType}&benefit=${searchList.benefit}&holiday=${searchList.holiday}&employment=${searchList.employment}
 					&page=${thisPage-1}">
-					<span class="material-symbols-rounded arrow">keyboard_arrow_left</span>
+					<span class="material-symbols-rounded arrow icon">keyboard_arrow_left</span>
 					</a>
 				</c:when>
 				<c:otherwise>
-					<span class="material-symbols-rounded disabled　arr">keyboard_arrow_left</span>
+					<span class="material-symbols-rounded disabled arrow icon">keyboard_arrow_left</span>
 				</c:otherwise>
 			</c:choose>
 			
 			<!-- ページ番号 -->
-			<c:forEach var="i" begin="1" end="${totalPage}">
-				<c:choose>
-					<c:when test="${i==thisPage}">
-						${i}
-					</c:when>
-					<c:otherwise>
-						<a href="?company=${searchList.company}&prefecture=${searchList.prefecture}&address=${searchList.address}
-						&job_type=${searchList.jobType}&benefit=${searchList.benefit}&holiday=${searchList.holiday}&employment=${searchList.employment}
-						&page=${i}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
+			<div class="page-number-con">
+				<c:forEach var="i" begin="1" end="${totalPage}">
+					<c:choose>
+						<c:when test="${i==thisPage}">
+							<div class="page-num">${i}</div>
+						</c:when>
+						<c:otherwise>
+							<a href="?company=${searchList.company}&prefecture=${searchList.prefecture}&address=${searchList.address}
+							&job_type=${searchList.jobType}&benefit=${searchList.benefit}&holiday=${searchList.holiday}&employment=${searchList.employment}
+							&page=${i}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</div>
 			
 			<!-- 右矢印 -->
 			<c:choose>
@@ -185,11 +195,11 @@
 					<a href="?company=${searchList.company}&prefecture=${searchList.prefecture}&address=${searchList.address}
 					&job_type=${searchList.jobType}&benefit=${searchList.benefit}&holiday=${searchList.holiday}&employment=${searchList.employment}
 					&page=${thisPage+1}">
-					<span class="material-symbols-rounded arrow">keyboard_arrow_right</span>
+					<span class="material-symbols-rounded arrow icon">keyboard_arrow_right</span>
 					</a>
 				</c:when>
 				<c:otherwise>
-					<span class="material-symbols-rounded disabled arrow">keyboard_arrow_right</span>
+					<span class="material-symbols-rounded disabled arrow icon">keyboard_arrow_right</span>
 				</c:otherwise>
 			</c:choose>
 		</c:if>
