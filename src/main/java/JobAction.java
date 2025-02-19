@@ -1,11 +1,12 @@
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import bean.JobBean;
 import bean.JobExperienceBean;
 import dao.JobDAO;
 import dao.JobExperienceDAO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import tool.Action;
 
 public class JobAction extends Action {
@@ -45,4 +46,3 @@ public class JobAction extends Action {
 		}
 	}
 }
-

@@ -38,31 +38,27 @@ public class JobDAO extends DAO {
 				job.setHoliday(rs.getInt("Holiday"));
 				job.setEmployment(rs.getString("Employment"));
 				job.setPdf_path(rs.getString("Pdf_path"));
-
 				list.add(job);
 			}
 			//DBにsearchし、その結果をBeanに格納し返す
 			return list;
-		} catch (Exception e) {
-			throw e;
 		}
 	}
 	
-	
 	//JobListActinのsearchメソッド（会社名の絞り込み無し）
 	public List<JobBean> search() throws Exception {
-
+		
 		//検索結果を入れるArrayListを準備
 		List<JobBean> list = new ArrayList<>();
-
+		
 		//String companyがnullとnull以外のSQL文をsql変数に代入する
 		String sql = "SELECT * FROM job ";
-
+		
 		try ( //データベースへ接続
 				Connection con = getConnection();
 				//SQLの準備
 				PreparedStatement st = con.prepareStatement(sql);) {
-
+			
 			//SQLの実行、結果を取得
 			ResultSet rs = st.executeQuery();
 			//結果を1レコードずつBeanへ格納し、ArrayListへ追加
@@ -76,13 +72,11 @@ public class JobDAO extends DAO {
 				job.setHoliday(rs.getInt("Holiday"));
 				job.setEmployment(rs.getString("Employment"));
 				job.setPdf_path(rs.getString("Pdf_path"));
-
+				
 				list.add(job);
 			}
 			//DBにsearchし、その結果をBeanに格納し返す
 			return list;
-		} catch (Exception e) {
-			throw e;
 		}
 	}
 
@@ -187,6 +181,7 @@ public class JobDAO extends DAO {
 		}
 		return jobList;
 	}
+	
 	// 求人検索のページネーション用
 	public int count(SearchBean searchBean) throws Exception {
 		int count = 0;
@@ -244,6 +239,7 @@ public class JobDAO extends DAO {
 		}
 		return count;
 	}
+	
 	// Jobの各プロパティを送り登録して、登録できたJobBeanを返す
 	public JobBean add(String company, String prefecture, String address, String job_type, int benefit, int holiday, String employment, String pdf_path)throws Exception{
 		JobBean job = null;
@@ -280,6 +276,7 @@ public class JobDAO extends DAO {
 		} 
 		return job; // 結果を返す
 	}
+	
 	// codeを元に一つのjobのみ返す
 	public JobBean getJob(String code) throws Exception {
 		JobBean job = null;
@@ -304,30 +301,25 @@ public class JobDAO extends DAO {
 		}
 		return job;
 	}
+	
 	//
 	public boolean delete(String code) throws Exception {
 		boolean result = false;
 		String sql = "DELETE FROM job WHERE code=?";
-		try (Connection connection = getConnection();
-				PreparedStatement st = connection.prepareStatement(sql)) {
-
-			st.setString(1, code);
-
-			int count = st.executeUpdate();
-
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql)) {
+			
+			pstmt.setString(1, code);
+			int count = pstmt.executeUpdate();
+			
 			if (count >= 1) {
 				result = true;
 			} else {
 				result = false;
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
 		}
 		return result;
 	}
-
 	
 	//codeをもとに会社名だけ抜き出す
 	public String getName(String code)throws Exception{

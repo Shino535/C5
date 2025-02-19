@@ -30,6 +30,7 @@ public class RootDAO extends DAO {
 		}
 		return root;
 	}
+	
 	public void register(String id,String name,String pass)throws Exception{
 		String sql="INSERT INTO root(id,name,pass) VALUE(?,?,?)";
 		try(Connection connection=getConnection();
@@ -42,6 +43,7 @@ public class RootDAO extends DAO {
 			pstmt.executeUpdate();
 		}
 	}
+	
 	public boolean update(String fieldName, String updateField, String id) {
 		boolean result=false;
 		String sql="UPDATE user SET "+fieldName+"=? WHERE id=?";
@@ -74,6 +76,7 @@ public class RootDAO extends DAO {
 	public boolean updatePass(String newPass,String id) {
 		return update("pass",newPass,id);
 	}
+	
 	public boolean delete(String id)throws Exception {
 		boolean result=false;
 		String selectSql="SELECT COUNT(*) FROM root";
@@ -102,6 +105,7 @@ public class RootDAO extends DAO {
 		}
 		return result;
 	}
+	
 	public int count(String keyword)throws Exception{
 		int count=0;
 		String sql="SELECT * FROM root name=?";
@@ -116,6 +120,7 @@ public class RootDAO extends DAO {
 		}
 		return count;
 	}
+	
 	public List<RootBean> search(String keyword,int page){
 		List<RootBean> rootList=new ArrayList<RootBean>();
 		String sql="DELETE FROM root WHERE name=?";
@@ -135,4 +140,4 @@ public class RootDAO extends DAO {
 		}
 		return rootList;
 	}
- }
+}

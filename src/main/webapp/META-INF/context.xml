@@ -1,4 +1,4 @@
-<Context reloadable="true">
+<!-- <Context reloadable="true">
 	<Resource
 		name="jdbc/c5_db"
 		auth="Container"
@@ -6,6 +6,18 @@
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://localhost/c5_db"
 		username="root"
+		password="password"
+	/>
+</Context> -->
+
+<Context reloadable="true">
+	<Resource
+		name="jdbc/c5_db"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://192.168.33.117/c5_db"
+		username="c5"
 		password="password"
 	/>
 </Context>

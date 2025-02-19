@@ -27,6 +27,9 @@
 					<c:when test="${sessionScope.user.role=='user'}">
 						<c:out value="${sessionScope.user.name}さん"/>
 					</c:when>
+					<c:when test="${sessionScope.user.role=='su'}">
+						<c:out value="SU:${sessionScope.user.name}さん"/>
+					</c:when>
 					<c:otherwise>
 						ゲストさん
 					</c:otherwise>
@@ -164,6 +167,11 @@
 							<c:out value="${sessionScope.user.name}"/>
 						</div>
 						<a href="/C5/Logout.action" class="button-s">ログアウト</a>
+					</c:when>
+					<c:when test="${sessionScope.user.role=='su'}">
+						<div class="name">
+							<c:out value="${sessionScope.user.name}"/>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="name">ゲストさん</div>

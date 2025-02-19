@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import bean.RootBean;
-import bean.UserBean;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,6 +13,9 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import bean.RootBean;
+import bean.UserBean;
 
 @WebFilter(urlPatterns={"/*"})
 public class RoleFilter implements Filter{
@@ -102,5 +103,3 @@ public class RoleFilter implements Filter{
 		chain.doFilter(request,response);
 	}
 }
-
-

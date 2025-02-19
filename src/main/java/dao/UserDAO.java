@@ -12,14 +12,14 @@ public class UserDAO extends DAO {
 	public UserBean login(String id, String pass) throws Exception {
 		UserBean user = null;
 		String sql = "SELECT * FROM user WHERE id=? AND pass=?";
-		try (Connection connection = getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
+			
 			pstmt.setString(1, id);
 			pstmt.setString(2, pass);
-
+			
 			ResultSet rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
 				user = new UserBean();
 				user.setCode(rs.getString("code"));
@@ -34,13 +34,13 @@ public class UserDAO extends DAO {
 
 	public void register(String id, String name, String pass) throws Exception {
 		String sql = "INSERT INTO user(id,name,pass) VALUE(?,?,?)";
-		try (Connection connection = getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
+			
 			pstmt.setString(1, id);
 			pstmt.setString(2, name);
 			pstmt.setString(3, pass);
-
+			
 			pstmt.executeUpdate();
 		}
 	}
@@ -48,37 +48,35 @@ public class UserDAO extends DAO {
 	public boolean update(String name, String pass, String code) throws Exception {
 		boolean result = false;
 		String sql = "UPDATE user SET name=? , pass=? WHERE code=?";
-		try (Connection connection = getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(sql);) {
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(false);
-
+			
 			pstmt.setString(1, name);
 			pstmt.setString(2, pass);
 			pstmt.setString(3, code);
-
+			
 			int count = pstmt.executeUpdate();
 			if (count == 1) {
 				result = true;
 			} else {
 				result = false;
 			}
-		} catch (Exception e) {
-			throw e;
 		}
 		return result;
 	}
-
-	public boolean delete(String id) {
+	
+	public boolean delete(String id) throws Exception{
 		boolean result = false;
 		String sql = "DELETE FROM user WHERE id=?";
 		try (Connection connection = getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(sql);) {
 			connection.setAutoCommit(false);
 			pstmt.setString(1, id);
-
+			
 			System.out.println("[INFO] UserDAO: ユーザー削除開始 - User ID: " + id);
 			int line = pstmt.executeUpdate();
-
+			
 			if (line > 0) { // 1行以上削除された場合のみ成功。 ★ 修正: 削除成功判定を `line > 0` に変更
 				connection.commit();
 				result = true;
@@ -88,10 +86,6 @@ public class UserDAO extends DAO {
 				System.out.println("[ERROR] UserDAO: ユーザー削除失敗 (該当ユーザーが見つからない可能性) - User ID: " + id);
 			}
 			connection.setAutoCommit(true);
-		} catch (Exception e) {
-			System.out.println("[ERROR] UserDAO: データベースエラー発生");
-			e.printStackTrace();
-			result = false;
 		}
 		return result;
 	}
