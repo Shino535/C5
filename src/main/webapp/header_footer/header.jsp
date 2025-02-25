@@ -115,6 +115,14 @@
 							<div class="icon-text">ポートフォリオ</div>
 						</div>
 						<div class="nav-icon">
+							<a href="/C5/su/Index.action" class="button-icon nav-button-icon">
+								<span class="material-symbols-rounded icon">
+								note_add
+								</span>
+							</a>
+							<div class="icon-text">投稿</div>
+						</div>
+						<div class="nav-icon">
 							<a href="/C5/Logout.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
 								logout
