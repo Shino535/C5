@@ -54,6 +54,7 @@
 			<div class="nav-bar">
 				<c:choose>
 					<c:when test="${sessionScope.root.role=='root'}">
+					<!-- root権限用 -->
 						<div class="nav-icon">
 							<a href="/C5/root/ExperienceList.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
@@ -88,6 +89,7 @@
 						</div>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='user'}">
+					<!-- user権限用 -->
 						<div class="nav-icon">
 							<a href="/C5/user/UserClose.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
@@ -106,8 +108,9 @@
 						</div>
 					</c:when>
 					<c:when test="${sessionScope.user.role=='su'}">
+					<!-- su権限用 -->
 						<div class="nav-icon">
-							<a href="/C5/su/Index.action" class="button-icon nav-button-icon">
+							<a href="/C5/su/Portfolio.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
 								supervised_user_circle
 								</span>
@@ -115,7 +118,7 @@
 							<div class="icon-text">ポートフォリオ</div>
 						</div>
 						<div class="nav-icon">
-							<a href="/C5/su/Index.action" class="button-icon nav-button-icon">
+							<a href="/C5/su/Add.action" class="button-icon nav-button-icon">
 								<span class="material-symbols-rounded icon">
 								note_add
 								</span>

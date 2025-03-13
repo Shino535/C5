@@ -5,10 +5,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import tool.Action;
 
-public class IndexAction extends Action{
+public class PortfolioAction extends Action{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if("GET".equals(request.getMethod())) return "su_index.jsp";
+		if("GET".equals(request.getMethod())) return "portfolio.jsp";
 		return null;
 	}
 }

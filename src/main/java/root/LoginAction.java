@@ -1,10 +1,11 @@
 package root;
 
-import bean.RootBean;
-import dao.RootDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import bean.RootBean;
+import dao.RootDAO;
 import tool.Action;
 
 public class LoginAction extends Action{

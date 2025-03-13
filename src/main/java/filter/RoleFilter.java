@@ -41,7 +41,7 @@ public class RoleFilter implements Filter{
 		}
 		
 		String uri=httpRequest.getRequestURI();
-		System.out.printf("フィルター通過 :名前[%s] 権限[%s] URI[%s] %n",(name==null?"ゲスト":name),(role==null?"なし":role),uri);
+		System.out.printf("ﾌｨﾙﾀｰ通過:名前[%s] 権限[%s] URI[%s] %n",(name==null?"ゲスト":name),(role==null?"なし":role),uri);
 		
 		List<String> allowedPaths = Arrays.asList(
 			"/C5/Search","/C5/Job","/C5/jobDetails","/C5/pdf",
