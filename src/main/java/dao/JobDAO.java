@@ -10,24 +10,15 @@ import bean.JobBean;
 import bean.SearchBean;
 
 public class JobDAO extends DAO {
+	
 	//JobListActinのsearchメソッド（会社名の絞り込み時）
 	public List<JobBean> search(String company) throws Exception {
-		
-		//検索結果を入れるArrayListを準備
 		List<JobBean> list = new ArrayList<>();
-		
-		//String companyがnullとnull以外のSQL文をsql変数に代入する
 		String sql = "SELECT * FROM job WHERE company LIKE ?";
-		
-		try ( //データベースへ接続
-				Connection con = getConnection();
-				//SQLの準備
-				PreparedStatement st = con.prepareStatement(sql);) {
-			//プレースホルダーへ値を入れる
-			st.setString(1, "%" + company + "%");
-			//SQLの実行、結果を取得
-			ResultSet rs = st.executeQuery();
-			//結果を1レコードずつBeanへ格納し、ArrayListへ追加
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + company + "%");
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				JobBean job = new JobBean();
 				job.setCode(rs.getString("code"));
@@ -40,28 +31,17 @@ public class JobDAO extends DAO {
 				job.setPdf_path(rs.getString("Pdf_path"));
 				list.add(job);
 			}
-			//DBにsearchし、その結果をBeanに格納し返す
 			return list;
 		}
 	}
 	
 	//JobListActinのsearchメソッド（会社名の絞り込み無し）
 	public List<JobBean> search() throws Exception {
-		
-		//検索結果を入れるArrayListを準備
 		List<JobBean> list = new ArrayList<>();
-		
-		//String companyがnullとnull以外のSQL文をsql変数に代入する
 		String sql = "SELECT * FROM job ";
-		
-		try ( //データベースへ接続
-				Connection con = getConnection();
-				//SQLの準備
-				PreparedStatement st = con.prepareStatement(sql);) {
-			
-			//SQLの実行、結果を取得
-			ResultSet rs = st.executeQuery();
-			//結果を1レコードずつBeanへ格納し、ArrayListへ追加
+		try(Connection connection = getConnection();
+			PreparedStatement pstmt = connection.prepareStatement(sql);) {
+			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				JobBean job = new JobBean();
 				job.setCode(rs.getString("code"));
@@ -75,7 +55,6 @@ public class JobDAO extends DAO {
 				
 				list.add(job);
 			}
-			//DBにsearchし、その結果をBeanに格納し返す
 			return list;
 		}
 	}
@@ -86,21 +65,20 @@ public class JobDAO extends DAO {
 		String sql = "UPDATE job SET company=? , prefecture=? ,address=? ,job_type=? ,benefit=? ,holiday=?, employment=?,pdf_path=? WHERE code=?";
 		try(Connection connection = getConnection();
 			PreparedStatement pstmt = connection.prepareStatement(sql);) {
-			//データ型の変換
+			
 			int benefit = Integer.parseInt(s_benefit);
 			int holiday = Integer.parseInt(s_holiday);
 			
-			//プレースホルダへ値を入れる
-			pstmt.setString(1, company); // 
-			pstmt.setString(2, prefecture); // 
-			pstmt.setString(3, address); // 
-			pstmt.setString(4, job_type); // 
-			pstmt.setInt(5, benefit); // 
-			pstmt.setInt(6, holiday); // 
-			pstmt.setString(7, employment); // 
-			pstmt.setString(8, pdf); // 
-			pstmt.setString(9, code); // 
-			//SQLの実行、結果を取得
+			pstmt.setString(1, company);
+			pstmt.setString(2, prefecture);
+			pstmt.setString(3, address);
+			pstmt.setString(4, job_type);
+			pstmt.setInt(5, benefit);
+			pstmt.setInt(6, holiday);
+			pstmt.setString(7, employment);
+			pstmt.setString(8, pdf);
+			pstmt.setString(9, code);
+			
 			int count = pstmt.executeUpdate();
 			if (count == 1) {
 				result = true;
@@ -182,7 +160,7 @@ public class JobDAO extends DAO {
 		return jobList;
 	}
 	
-	// 求人検索のページネーション用
+	// 求人検索のページネーション用メソッド
 	public int count(SearchBean searchBean) throws Exception {
 		int count = 0;
 		String sql = "SELECT COUNT(*) FROM job WHERE 1=1 ";
@@ -240,7 +218,7 @@ public class JobDAO extends DAO {
 		return count;
 	}
 	
-	// Jobの各プロパティを送り登録して、登録できたJobBeanを返す
+	// Jobの各プロパティを送って登録し、登録できたJobBeanを返す
 	public JobBean add(String company, String prefecture, String address, String job_type, int benefit, int holiday, String employment, String pdf_path)throws Exception{
 		JobBean job = null;
 		String sql = "INSERT INTO job(company, prefecture, address, job_type, benefit, holiday, employment, pdf_path) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -302,7 +280,7 @@ public class JobDAO extends DAO {
 		return job;
 	}
 	
-	//
+	//codeをもとに削除するメソッド
 	public boolean delete(String code) throws Exception {
 		boolean result = false;
 		String sql = "DELETE FROM job WHERE code=?";
