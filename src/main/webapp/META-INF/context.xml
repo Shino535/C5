@@ -1,4 +1,4 @@
-<Context reloadable="true">
+<!-- <Context reloadable="true">
 	<Resource
 		name="jdbc/c5_db"
 		auth="Container"
@@ -8,9 +8,9 @@
 		username="root"
 		password="password"
 	/>
-</Context>
+</Context> -->
 
-<!-- <Context reloadable="true">
+<Context reloadable="true">
 	<Resource
 		name="jdbc/c5_db"
 		auth="Container"
@@ -20,4 +20,4 @@
 		username="c5"
 		password="password"
 	/>
-</Context> -->
+</Context>

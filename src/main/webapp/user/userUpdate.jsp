@@ -1,11 +1,10 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/header_footer/header.jsp"%>
 
 <h3>更新内容入力</h3>
 
 <c:if test="${not empty error}">
-   	${error}
+   	<c:out value="${error}"/>
 </c:if>
 
 <form action="UserUpdate.action" method="post">

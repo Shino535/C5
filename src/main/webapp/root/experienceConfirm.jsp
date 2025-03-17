@@ -19,7 +19,7 @@
 					<span class="experience-company">
 						<c:out value="${experience.rows[0].job_name}"/>
 					</span>
-					${experience.rows[0].date}
+					<c:out value="${experience.rows[0].date}"/>
 					<span class="experience-name">
 						<c:out value="${experience.rows[0].user_name}"/>
 					</span>

@@ -6,8 +6,8 @@
 <div class="jobupdate-container">
 	<div class="jobupdate-">
 		<h3>更新対象求人</h3>
-		会社名：${jobBean.company}<br>
-		所在地：${jobBean.address}
+		<c:out value="会社名：${jobBean.company}"/><br>
+		<c:out value="所在地：${jobBean.address}"/>
 	</div>
 	<form action="JobUpdate.action" method="post" enctype="multipart/form-data">
 		<div class="jobupdate-form">

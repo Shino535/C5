@@ -17,7 +17,7 @@
 				<c:when test="${param.confirm=='yes'}">
 					<c:forEach var="root" items="${rootList}">
 						<c:if test="${not empty param.selectId&&param.selectId.contains(root.id)}">
-							<p>削除対象:ID:${root.id},名前:${root.name}</p>
+							<p><c:out value="削除対象:ID:${root.id},名前:${root.name}"/></p>
 						</c:if>
 					</c:forEach>
 				</c:when>
@@ -37,7 +37,7 @@
 		<form action="AccountDeleteRootIn.action">
 			<c:forEach var="root" items="${rootList}">
 				<p>
-					ID:${root.id},名前${root.name}
+					<c:out value="ID:${root.id},名前${root.name}"/>
 					<input type="checkbox" name="selectId" value="${root.id}">
 				</p>
 			</c:forEach>
@@ -54,15 +54,15 @@
 	<c:forEach var="i" begin="1" end="${totalPage}">
 		<c:choose>
 			<c:when test="${i==page}">
-				<span>${i}</span>
+				<span><c:out value="${i}"/></span>
 			</c:when>
 			<c:otherwise>
-				<a href="AccountDeleteRootIn.action?page=${i}&keyword=${param.keyword}">${i}</a>
+				<a href="AccountDeleteRootIn.action?page=${i}&keyword=${param.keyword}"><c:out value="${i}"/></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	<c:if test="${page<totalPage}">
-		<a href="AccountDeleteRootIn.action?page=${page+1}&keyword=${param.keyword}">次へ</a>
+		<a href="AccountDeleteRootIn.action?page=${page+1}&keyword=${param.keyword}"><c:out value="次へ"/></a>
 	</c:if>
 </c:if>
 <%@include file="/header_footer/footer.jsp"%>

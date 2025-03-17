@@ -19,11 +19,11 @@
 					</div>
 					<div class="experience-info">
 						<div class="experience-row-1">
-							<span class="experience-company">会社名:${experience.job_name}</span>
-							${experience.date}
-							<span class="experience-name">投稿者:${experience.user_name}</span>
+							<span class="experience-company"><c:out value="会社名:${experience.job_name}"/></span>
+							<c:out value="${experience.date}"/>
+							<span class="experience-name"><c:out value="投稿者:${experience.user_name}"/></span>
 						</div>
-						<div class="experience-comment">コメント:${experience.comment}</div>
+						<div class="experience-comment"><c:out value="コメント:${experience.comment}"/></div>
 					</div>
 				</div>
 			</label>

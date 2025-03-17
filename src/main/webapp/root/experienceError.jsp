@@ -4,6 +4,6 @@
 
 <h2>エラー</h2>
 <p>エラーが発生しました。</p>
-<p>${errorMessage}</p>
+<p><c:out value="${errorMessage}"/></p>
 
 <%@ include file="/header_footer/footer.jsp"%>

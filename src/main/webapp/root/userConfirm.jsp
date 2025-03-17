@@ -9,7 +9,7 @@
 	
 	<c:forEach var="name" items="${deleteName}">
 		<div class="userdel-row">
-			<p>${name}</p>
+			<p><c:out value="${name}"/></p>
 		</div>
 	</c:forEach>
 	
